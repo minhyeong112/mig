@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   
     for (var i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("focus", function() {
+        this.classList.add("hover"); // Add hover class on focus
+      });
+      coll[i].addEventListener("blur", function() {
+        this.classList.remove("hover"); // Remove hover class on blur
+      });
       coll[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
