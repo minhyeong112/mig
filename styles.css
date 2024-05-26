@@ -317,7 +317,7 @@ figcaption {
     margin-left: 5px;
   }
   
-.active:after {
+  .active:after {
     content: "\002B"; /* Unicode character for "plus" sign (+) */
   }
 .content {
