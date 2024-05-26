@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Neue Machina';
-    src: url(mig/fonts/PPNeueMachina-PlainRegular.otf) format('opentype'),
+    src: url(/fonts/PPNeueMachina-PlainRegular.otf) format('opentype'),
   }
 
 :root {
