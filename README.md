@@ -1,2 +1,0 @@
-# mig
-personal website
