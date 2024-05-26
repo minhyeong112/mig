@@ -305,12 +305,13 @@ figcaption {
 }
 
 .collapsible:hover {
+    /* Maintain your existing hover styles if desired */
     background-color: var(--text-mid-low);
     color: var(--background);
-}
-
-.collapsible:after {
-    content: "\2212"; /* Unicode character for "minus" sign (−) */
+  }
+  
+  .collapsible:after {
+    content: "\002B"; /* Unicode character for "plus" sign (+) */
     color: var(--text-low);
     font-weight: bold;
     float: right;
@@ -318,8 +319,9 @@ figcaption {
   }
   
   .active:after {
-    content: "\002B"; /* Unicode character for "plus" sign (+) */
+    content: "\2212"; /* Unicode character for "minus" sign (−) */
   }
+  
 .content {
     padding: 0 18px;
     display: none; /* Ensure content is initially hidden */
