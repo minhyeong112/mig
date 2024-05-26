@@ -302,9 +302,9 @@ figcaption {
     transition: background-color 0.4s, color 0.4s;
     font-family: 'Neue Machina', sans-serif;
     border-bottom: 1px solid var(--line);
-}
-
-.collapsible:hover {
+  }
+  
+  .collapsible:hover {
     /* Maintain your existing hover styles if desired */
     background-color: var(--text-mid-low);
     color: var(--background);
@@ -322,10 +322,16 @@ figcaption {
     content: "\2212"; /* Unicode character for "minus" sign (−) */
   }
   
-.content {
+  /* New style for active collapsible section */
+  .active {
+    background-color: #ddd; /* Light gray background when open */
+  }
+  
+  .content {
     padding: 0 18px;
     display: none; /* Ensure content is initially hidden */
     overflow: hidden;
     background-color: var(--background);
     border-bottom: 1px solid var(--line);
-}
+  }
+  
