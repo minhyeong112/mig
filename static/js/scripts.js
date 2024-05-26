@@ -1,6 +1,15 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const lastUpdatedElement = document.getElementById('last-updated');
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    lastUpdatedElement.textContent = formattedDate;
+document.addEventListener("DOMContentLoaded", function() {
+    // Handle collapsible sections
+    var coll = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block" || content.style.display === "") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
 });
