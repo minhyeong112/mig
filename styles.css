@@ -1,7 +1,7 @@
 /* Ensure to adjust the paths as per your project structure */
 @font-face {
     font-family: 'Neue Machina';
-    src: url(/fonts/PPNeueMachina-PlainRegular.otf) format('opentype'),
+    src: url(fonts\PPNeueMachina-PlainRegular.otf) format('opentype'),
   }
 :root {
     --background: #fff;
