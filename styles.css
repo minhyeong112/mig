@@ -94,6 +94,13 @@ body {
     font-kerning: normal;
 }
 
+body.dark-mode {
+    background-color: #111; /* Dark background color */
+    color: #C7C8CA; /* Light text color */
+    /* Adjust other color properties as needed for dark mode */
+  }
+  
+
 p {
     margin: 0;
     padding: 0;
