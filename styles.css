@@ -90,6 +90,11 @@ p {
     padding: 0;
 }
 
+.update-text {
+    /*font-style: italic;*/
+    font-size: 0.75rem; /* Adjust font size as needed */
+  }
+
 .wrap {
     position: relative;
     width: 90%;
