@@ -297,8 +297,8 @@ figcaption {
 
 /* Collapsible sections */
 .collapsible {
-    background-color: var(--background);
-    color: var(--text);
+    /* Remove background-color property */
+    color: var(--text); /* Use text color defined in dark mode styles */
     cursor: pointer;
     padding: 10px;
     width: 100%;
@@ -313,8 +313,8 @@ figcaption {
   
   .collapsible:hover {
     /* Maintain your existing hover styles if desired */
-    background-color: var(--text-mid-low);
-    color: var(--background);
+    background-color: var(--text-mid-low); /* Adjust hover color if needed */
+    color: var(--background); /* Inherit dark mode text color */
   }
   
   .collapsible:after {
@@ -329,16 +329,17 @@ figcaption {
     content: "\2212"; /* Unicode character for "minus" sign (−) */
   }
   
-  /* New style for active collapsible section */
   .active {
-    background-color: #ddd; /* Light gray background when open */
+    /* Remove background-color property */
+    color: var(--text); /* Use text color defined in dark mode styles */
+    /* Other styles for active collapsible sections... */
   }
   
   .content {
     padding: 0 18px;
     display: none; /* Ensure content is initially hidden */
     overflow: hidden;
-    background-color: var(--background);
+    background-color: transparent; /* Set background to transparent in dark mode */
     border-bottom: 1px solid var(--line);
   }
   
