@@ -20,6 +20,8 @@
     --line-height-th-content: 1.935;
     --photo-height: 100vh;
     --font-family: 'Neue Machina', sans-serif;
+    --text-color: #000; /* Standard color for section titles (adjust as needed) */
+    --text-hover-color: #333; /* Hover color for section titles (adjust as needed) */
 }
 
 @media (min-width: 250px) {
@@ -64,17 +66,6 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #111;
-        --text: #C7C8CA;
-        --text-mid-low: #a2a2a2;
-        --text-mid: #a4a6a8;
-        --text-low: #737476;
-        --line: #656565;
-    }
-}
-
 ::selection {
     background: var(--text);
     color: var(--background);
@@ -93,13 +84,6 @@ body {
     overflow-x: hidden;
     font-kerning: normal;
 }
-
-body.dark-mode {
-    background-color: #111; /* Dark background color */
-    color: #C7C8CA; /* Light text color */
-    /* Adjust other color properties as needed for dark mode */
-  }
-  
 
 p {
     margin: 0;
@@ -157,7 +141,6 @@ a:hover {
 
 /* UNIQUE */
 .home-icon-circle {
-    /* Or #FF2E00 - more dark */
     background-color: #DCC13E;
     width: 20px;
     height: 20px;
@@ -298,7 +281,7 @@ figcaption {
 /* Collapsible sections */
 .collapsible {
     /* Remove background-color property */
-    color: var(--text); /* Use text color defined in dark mode styles */
+    color: var(--text); 
     cursor: pointer;
     padding: 10px;
     width: 100%;
@@ -314,7 +297,7 @@ figcaption {
   .collapsible:hover {
     /* Maintain your existing hover styles if desired */
     background-color: var(--text-mid-low); /* Adjust hover color if needed */
-    color: var(--background); /* Inherit dark mode text color */
+    color: var(--background); 
   }
   
   .collapsible:after {
@@ -331,7 +314,7 @@ figcaption {
   
   .active {
     /* Remove background-color property */
-    color: var(--text); /* Use text color defined in dark mode styles */
+    color: var(--text); 
     /* Other styles for active collapsible sections... */
   }
   
@@ -339,7 +322,8 @@ figcaption {
     padding: 0 18px;
     display: none; /* Ensure content is initially hidden */
     overflow: hidden;
-    background-color: transparent; /* Set background to transparent in dark mode */
+    background-color: transparent; 
     border-bottom: 1px solid var(--line);
   }
+  
   
