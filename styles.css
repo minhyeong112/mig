@@ -153,16 +153,15 @@ a:hover {
     text-align: right;
 }
 
-/* UNIQUE */
 .home-icon-circle {
     background-color: #DCC13E;
-    width: 20px;
-    height: 20px;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
     border-radius: 50%;
-    cursor: pointer; /* Add this line */
-    display: flex; /* Add this line */
-    align-items: center; /* Add this line */
-    justify-content: center; /* Add this line */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .svg {

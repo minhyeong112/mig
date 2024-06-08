@@ -5,9 +5,7 @@ function toggleDarkMode() {
 document.addEventListener("DOMContentLoaded", function() {
   // Handle dark mode toggle
   const homeIconCircle = document.getElementById("home-icon-circle");
-  homeIconCircle.addEventListener("click", function() {
-      document.body.classList.toggle("dark-mode");
-  });
+  homeIconCircle.addEventListener("click", toggleDarkMode);
 
   // Handle collapsible sections
   var coll = document.getElementsByClassName("collapsible");
@@ -31,4 +29,3 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 });
-
