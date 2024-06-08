@@ -3,7 +3,7 @@
     src: url('PPNeueMachina-InktrapRegular.otf') format('opentype'),
   }
 
-  :root {
+:root {
     --background: #fff;
     --text: #111111;
     --text-mid: #333333;
@@ -22,15 +22,6 @@
     --font-family: 'Neue Machina', sans-serif;
     --text-color: #000; /* Standard color for section titles (adjust as needed) */
     --text-hover-color: #333; /* Hover color for section titles (adjust as needed) */
-}
-
-.dark-mode {
-    --background: #111111;
-    --text: #ffffff;
-    --text-mid: #dddddd;
-    --text-mid-low: #bbbbbb;
-    --text-low: #999999;
-    --line: #666666;
 }
 
 @media (min-width: 250px) {
@@ -153,15 +144,12 @@ a:hover {
     text-align: right;
 }
 
+/* UNIQUE */
 .home-icon-circle {
     background-color: #DCC13E;
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .svg {
