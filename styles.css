@@ -3,7 +3,7 @@
     src: url('PPNeueMachina-InktrapRegular.otf') format('opentype'),
   }
 
-:root {
+  :root {
     --background: #fff;
     --text: #111111;
     --text-mid: #333333;
@@ -22,6 +22,15 @@
     --font-family: 'Neue Machina', sans-serif;
     --text-color: #000; /* Standard color for section titles (adjust as needed) */
     --text-hover-color: #333; /* Hover color for section titles (adjust as needed) */
+}
+
+.dark-mode {
+    --background: #111111;
+    --text: #ffffff;
+    --text-mid: #dddddd;
+    --text-mid-low: #bbbbbb;
+    --text-low: #999999;
+    --line: #666666;
 }
 
 @media (min-width: 250px) {
@@ -150,6 +159,10 @@ a:hover {
     width: 20px;
     height: 20px;
     border-radius: 50%;
+    cursor: pointer; /* Add this line */
+    display: flex; /* Add this line */
+    align-items: center; /* Add this line */
+    justify-content: center; /* Add this line */
 }
 
 .svg {
