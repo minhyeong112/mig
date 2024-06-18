@@ -1,11 +1,13 @@
-@font-face {
-    font-family: 'Neue Machina';
-    src: url('PPNeueMachina-InktrapRegular.otf') format('opentype'),
-  }
-
 :root {
     --background: #fff;
     --text: #111111;
+    --dark-background: #111111;
+    --dark-text: #fff;
+    --link-color: #111111; /* Link color for light mode */
+    --link-hover-color: #333; /* Link hover color for light mode */
+    --dark-link-color: #fff; /* Link color for dark mode */
+    --dark-link-hover-color: #ccc; /* Link hover color for dark mode */
+    --circle-color: #DCC13E; /* Add this variable for the circle color */
     --text-mid: #333333;
     --text-mid-low: #444444;
     --text-low: #555555;
@@ -22,6 +24,51 @@
     --font-family: 'Neue Machina', sans-serif;
     --text-color: #000; /* Standard color for section titles (adjust as needed) */
     --text-hover-color: #333; /* Hover color for section titles (adjust as needed) */
+}
+
+body.dark-mode {
+    background: var(--dark-background);
+    color: var(--dark-text);
+}
+
+body.dark-mode a {
+    color: var(--dark-link-color);
+    border-bottom: 1px solid var(--dark-link-hover-color);
+}
+
+body.dark-mode a:hover {
+    border-bottom: 1px solid var(--dark-link-hover-color);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.home-icon-circle {
+    background-color: var(--circle-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; /* Add some space between the button and links */
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+}
+
+/* LINKS */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--link-hover-color);
+}
+
+a:hover {
+    border-bottom: 1px solid var(--link-color);
 }
 
 @media (min-width: 250px) {
