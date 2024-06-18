@@ -20,11 +20,19 @@ document.addEventListener("DOMContentLoaded", function() {
       content.style.display = content.style.display === "block" ? "none" : "block";
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+  // Dark mode toggle
   const darkModeToggle = document.getElementById('darkModeToggle');
+
+  // Check if dark mode preference is saved in localStorage
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+  }
+
   darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle('dark-mode');
+    // Save the dark mode preference in localStorage
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
   });
 });
