@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Neue Machina';
+    src: url('PPNeueMachina-InktrapRegular.otf') format('opentype');
+}
+
 :root {
     --background: #fff;
     --text: #111111;
