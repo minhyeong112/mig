@@ -402,3 +402,21 @@ figcaption {
     width: 300px; /* Set the width of the video */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
 }
+
+  .slide {
+    display: none;
+  }
+  
+  .slide img {
+    width: 100%;
+  }
+  
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
