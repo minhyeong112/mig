@@ -391,3 +391,14 @@ figcaption {
     flex: 1; /* Make columns equal width */
     padding: 1rem;
   }
+
+  .video-container {
+    display: flex;
+    justify-content: center; /* Center the video horizontally */
+    margin: 20px 0; /* Add some margin to space out the videos */
+}
+
+.video-container video {
+    width: 300px; /* Set the width of the video */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
