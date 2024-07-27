@@ -17,7 +17,7 @@
     --text-mid-low: #444444;
     --text-low: #555555;
     --line: #999999;
-    --f-size: 1rem;
+    --f-size: 0.85rem; /* Reduced base font size */
     --scale-s: 0.8;
     --scale-m: 0.96;
     --scale-ml: 0.995;
@@ -78,42 +78,42 @@ a:hover {
 
 @media (min-width: 250px) {
     :root {
-        --f-size: 1.05rem;
+        --f-size: 0.9rem;
         --max-width: 560px;
     }
 }
 
 @media (min-width: 500px) {
     :root {
-        --f-size: 1.075rem;
+        --f-size: 0.925rem;
         --max-width: 590px;
     }
 }
 
 @media (min-width: 1000px) {
     :root {
-        --f-size: 1.115rem;
+        --f-size: 0.95rem;
         --max-width: 610px;
     }
 }
 
 @media (min-width: 1500px) {
     :root {
-        --f-size: 1.15rem; 
+        --f-size: 0.975rem; 
         --max-width: 640px;
     }
 }
 
 @media (min-width: 2000px) {
     :root {
-        --f-size: 1.25rem;
+        --f-size: 1.05rem;
         --max-width: 710px;
     }
 }
 
 @media (min-width: 2250px) {
     :root {
-        --f-size: 1.35rem;
+        --f-size: 1.1rem;
         --max-width: 760px;
     }
 }
@@ -144,7 +144,7 @@ p {
 
 .update-text {
     /*font-style: italic;*/
-    font-size: 0.70rem; /* Adjust font size as needed */
+    font-size: 0.60rem; /* Adjust font size as needed */
   }
 
 .wrap {
