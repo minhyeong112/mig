@@ -1,15 +1,25 @@
 name: BizDev Task Proposal
 description: Standard template for bizdev task proposals at Ubiquity
-title: "Desciptive title starting with a verb"
+title: "Descriptive title starting with a verb"
 labels: []
 body:
   - type: markdown
     attributes:
       value: |
-        Start issue title with a verb:
+        Examples:
         ✅ "Add drippi.ai automation to Marketing Tech Stack"
         ✅ "Create Standard Operating Procedures for Outreach Team"
         ✅ "Manage the Consensus HK Campaign"
+
+  - type: checkboxes
+    id: time-estimate
+    attributes:
+      label: Time Estimate
+      description: Go to "Labels" and type "Time:".  Select the appropriate time estimate.  
+      options:
+        - label: I have assigned a time label to this issue
+    validations:
+      required: true
 
   - type: textarea
     id: background
