@@ -1,6 +1,6 @@
 name: BizDev Task Proposal
 description: Standard template for bizdev task proposals at Ubiquity
-title: ""
+title: "Desciptive title starting with a verb"
 labels: []
 body:
   - type: markdown
@@ -49,8 +49,7 @@ body:
     attributes:
       label: Time Estimate
       description: Go to "Labels" and type "Time:".  Select the appropriate time estimate.  
-      multiple: false
       options:
-        - "label: I have assigned a time label to this issue"
+        - label: I have assigned a time label to this issue
     validations:
       required: true
