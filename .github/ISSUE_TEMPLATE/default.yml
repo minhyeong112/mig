@@ -7,6 +7,11 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this issue!
+        
+        Please start your issue title with an action verb, for example:
+        ✅ "Add drippi.ai automation to Marketing Tech Stack"
+        ✅ "Implement user authentication system"
+        ✅ "Update landing page design"
 
   - type: textarea
     id: background
@@ -29,12 +34,18 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: dropdown
     id: time-estimate
     attributes:
       label: Time Estimate
-      description: Estimated time to complete this task
-      placeholder: "e.g. 2 days, 1 week"
+      description: Select the estimated time to complete this task
+      multiple: false
+      options:
+        - "time: < 1 day"
+        - "time: 1-2 days"
+        - "time: 3-5 days"
+        - "time: 1-2 weeks"
+        - "time: 2+ weeks"
     validations:
       required: true
 
@@ -49,16 +60,3 @@ body:
         - [Description of link](URL)
     validations:
       required: false
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Checklist
-      description: Before submitting, please verify
-      options:
-        - label: I have added appropriate labels
-          required: true
-        - label: I have included a time estimate
-          required: true
-        - label: I have provided clear completion criteria
-          required: true
