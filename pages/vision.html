@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Vision Board</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #e8e0d4;
+}
+
+/* ── Passphrase Gate ── */
+#gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+}
+
+#gate .gate-box {
+  text-align: center;
+  padding: 40px;
+}
+
+#gate h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 2rem;
+  color: #cc9c30;
+  margin-bottom: 24px;
+  letter-spacing: 3px;
+}
+
+#gate input {
+  background: transparent;
+  border: 1px solid rgba(204, 156, 48, 0.3);
+  color: #e8e0d4;
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  outline: none;
+  width: 220px;
+  letter-spacing: 4px;
+}
+
+#gate input:focus {
+  border-color: #cc9c30;
+}
+
+#gate input::placeholder {
+  color: #5a5248;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+}
+
+#gate .error {
+  color: #8a4a4a;
+  font-size: 0.75rem;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#gate .error.show { opacity: 1; }
+
+/* ── Board (hidden until unlocked) ── */
+#board { display: none; }
+
+/* ── Slides ── */
+.slide {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3) saturate(0.8);
+  transition: transform 0.3s;
+}
+
+.slide:hover .slide-bg { transform: scale(1.02); }
+
+.slide-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.9) 100%);
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 30px;
+  max-width: 800px;
+}
+
+.slide-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  color: rgba(204, 156, 48, 0.5);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: #cc9c30;
+  letter-spacing: 3px;
+  line-height: 1.05;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #cc9c30;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  color: rgba(232, 224, 212, 0.7);
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.keyword {
+  padding: 8px 20px;
+  border: 1px solid rgba(204, 156, 48, 0.3);
+  border-radius: 30px;
+  font-size: 0.8rem;
+  color: #cc9c30;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(204, 156, 48, 0.05);
+}
+
+.big-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 700;
+  color: #cc9c30;
+  line-height: 1;
+  text-shadow: 0 4px 60px rgba(204, 156, 48, 0.2);
+}
+
+.diamond {
+  color: #cc9c30;
+  margin: 0 10px;
+  font-size: 0.6em;
+}
+
+.quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 300;
+  color: #cc9c30;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.stat-item { text-align: center; }
+
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #cc9c30;
+  font-weight: 700;
+}
+
+.stat-lbl {
+  font-size: 0.65rem;
+  color: #8a7e6e;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.pillars {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pill {
+  flex: 1;
+  min-width: 180px;
+  max-width: 250px;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid rgba(204, 156, 48, 0.15);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.pill-icon { font-size: 2rem; margin-bottom: 10px; }
+
+.pill h3 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #cc9c30;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.pill p {
+  font-size: 0.8rem;
+  color: #8a7e6e;
+  line-height: 1.5;
+}
+
+.timeline-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.q-block {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  text-align: left;
+  padding: 16px;
+  border-left: 2px solid #cc9c30;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.q-block h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #cc9c30;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.q-block p {
+  font-size: 0.75rem;
+  color: #8a7e6e;
+  line-height: 1.5;
+}
+
+.footer-line {
+  width: 50px;
+  height: 1px;
+  background: #cc9c30;
+  margin: 20px auto;
+}
+
+.nav {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+  display: none;
+}
+
+.nav.visible { display: flex; }
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(204, 156, 48, 0.3);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-dot:hover, .nav-dot.active {
+  background: #cc9c30;
+  border-color: #cc9c30;
+}
+
+@media (max-width: 768px) {
+  .nav { display: none !important; }
+  .pillars { gap: 15px; }
+  .pill { min-width: 140px; }
+  .timeline-row { gap: 12px; }
+  .q-block { min-width: 130px; }
+  .stats-row { gap: 25px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Passphrase Gate -->
+<div id="gate">
+  <div class="gate-box">
+    <h1>2026</h1>
+    <input type="password" id="passphrase" placeholder="passphrase" autofocus>
+    <div class="error" id="error">incorrect</div>
+  </div>
+</div>
+
+<!-- Vision Board -->
+<div id="board">
+<nav class="nav" id="nav"></nav>
+
+<!-- 1: TITLE -->
+<div class="slide" id="s1">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">2026 Vision Board</div>
+    <h1>Ruthless<br>Focus</h1>
+    <div class="footer-line"></div>
+    <div class="subtitle">Stop spreading thin. Go all-in on the few things that matter. Cut everything else.</div>
+    <div class="keywords">
+      <span class="keyword">Build</span>
+      <span class="keyword">Ship</span>
+      <span class="keyword">Simplify</span>
+      <span class="keyword">Compound</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2: HUMANITY LABS -->
+<div class="slide" id="s2">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Mission</div>
+    <h2>Humanity Labs</h2>
+    <div class="subtitle">Tools for better thinking. Signal over noise. Truth over virality.</div>
+    <div class="pillars">
+      <div class="pill">
+        <div class="pill-icon">&#9670;</div>
+        <h3>Vajra</h3>
+        <p>Signal filter for the internet. Live, billing, growing.</p>
+      </div>
+      <div class="pill">
+        <div class="pill-icon">&#9998;</div>
+        <h3>Guides</h3>
+        <p>OpenClaw + Obsidian + local AI. The playbook.</p>
+      </div>
+      <div class="pill">
+        <div class="pill-icon">&#9881;</div>
+        <h3>ObsidianClaw</h3>
+        <p>First Obsidian plugin for persistent AI agents.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3: SECOND BRAIN -->
+<div class="slide" id="s3">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The System</div>
+    <h2>Second Brain</h2>
+    <div class="subtitle">Every conversation, every idea, every lesson. Captured. Searchable. Yours forever.</div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-val">45+</div><div class="stat-lbl">Files Indexed</div></div>
+      <div class="stat-item"><div class="stat-val">Local</div><div class="stat-lbl">Private Search</div></div>
+      <div class="stat-item"><div class="stat-val">24/7</div><div class="stat-lbl">AI Agent</div></div>
+      <div class="stat-item"><div class="stat-val">All</div><div class="stat-lbl">Devices Synced</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4: REVENUE -->
+<div class="slide" id="s4">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Money</div>
+    <div class="big-number">$15K</div>
+    <div class="subtitle" style="margin-top:10px;">Monthly product revenue. No clients. No hourly billing. Products that compound while you sleep.</div>
+    <div class="pillars" style="margin-top:25px;">
+      <div class="pill"><h3>Vajra Pro</h3><p>100 subscribers = recurring revenue</p></div>
+      <div class="pill"><h3>Voice Gurus</h3><p>$997 setup + $300/mo with Joe</p></div>
+      <div class="pill"><h3>$10K+ Sprints</h3><p>One month. Five figures. Or no.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5: BODY -->
+<div class="slide" id="s5">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Body</div>
+    <h2>Physically<br>Impressive</h2>
+    <div class="subtitle">No more recommitting cycles. Systems, not willpower. Measure, don't guess.</div>
+    <div class="keywords">
+      <span class="keyword">Daily Exercise</span>
+      <span class="keyword">Tea Ritual</span>
+      <span class="keyword">Weight Vest</span>
+      <span class="keyword">VA Health</span>
+      <span class="keyword">Aura Ring</span>
+      <span class="keyword">Labs Baseline</span>
+    </div>
+  </div>
+</div>
+
+<!-- 6: CONTENT -->
+<div class="slide" id="s6">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Voice</div>
+    <h2>Content First</h2>
+    <div class="subtitle">No product launches without content. Build the audience, then ship to people who already care.</div>
+    <div class="pillars">
+      <div class="pill"><div class="pill-icon">&#127908;</div><h3>Podcast Studio</h3><p>Nolan building it. Your content engine.</p></div>
+      <div class="pill"><div class="pill-icon">&#9997;</div><h3>Manifestos</h3><p>AI consciousness. Open letter. Distribution.</p></div>
+      <div class="pill"><div class="pill-icon">&#129309;</div><h3>Partners</h3><p>Equity, not affiliates. Aligned incentives.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 7: FREEDOM -->
+<div class="slide" id="s7">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Life</div>
+    <h2>Bangkok Base.<br>World Access.</h2>
+    <div class="stats-row" style="margin-top:20px;">
+      <div class="stat-item"><div class="stat-val">BKK</div><div class="stat-lbl">Home</div></div>
+      <div class="stat-item"><div class="stat-val">MIA</div><div class="stat-lbl">Family</div></div>
+      <div class="stat-item"><div class="stat-val">TWN</div><div class="stat-lbl">DTV</div></div>
+      <div class="stat-item"><div class="stat-val">PHK</div><div class="stat-lbl">Explore</div></div>
+    </div>
+    <div class="subtitle" style="margin-top:25px;">Learn from every culture. Leave before absorbing the wrong parts.</div>
+  </div>
+</div>
+
+<!-- 8: CONSCIOUSNESS -->
+<div class="slide" id="s8">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Mind</div>
+    <div class="quote">"We don't know everything. We can only get samples. It is the best strategy to share samples."</div>
+    <div class="footer-line" style="margin-top:30px;"></div>
+    <div class="subtitle">Consciousness is multi-dimensional. Build tools that expand it.</div>
+  </div>
+</div>
+
+<!-- 9: MINIMALISM -->
+<div class="slide" id="s9">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Philosophy</div>
+    <h2>Only The Best</h2>
+    <div class="subtitle">If it's not your favorite version, get rid of it. One workspace. One system. One format. Markdown.</div>
+    <div class="keywords" style="margin-top:25px;">
+      <span class="keyword">Cut</span>
+      <span class="keyword">Upgrade</span>
+      <span class="keyword">Simplify</span>
+    </div>
+  </div>
+</div>
+
+<!-- 10: TIMELINE -->
+<div class="slide" id="s10">
+  <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80')"></div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+    <div class="slide-number">The Promise</div>
+    <h1>2026</h1>
+    <div class="timeline-row">
+      <div class="q-block"><h4>Q1</h4><p>Full-time Humanity Labs. Vajra beta. Podcast studio. Miami health trip.</p></div>
+      <div class="q-block"><h4>Q2</h4><p>Content engine live. ObsidianClaw MVP. Voice Gurus launch. 50 subscribers.</p></div>
+      <div class="q-block"><h4>Q3</h4><p>$10K/mo revenue. Open letter published. Second Brain packaged.</p></div>
+      <div class="q-block"><h4>Q4</h4><p>100+ subscribers. $15K/mo. The system runs itself.</p></div>
+    </div>
+    <div style="margin-top:35px;">
+      <div class="quote" style="font-size:clamp(1.2rem,2.5vw,1.8rem);">"You need a dream, a plan, and action.<br>Action is the most inspiring."</div>
+    </div>
+    <p style="margin-top:30px; color:#5a5248; font-size:0.7rem; letter-spacing:3px;">
+      HEALTH <span class="diamond">&#9670;</span> WEALTH <span class="diamond">&#9670;</span> RELATIONSHIPS
+    </p>
+  </div>
+</div>
+</div><!-- /board -->
+
+<script>
+// Passphrase gate
+const PASS = '123';
+const input = document.getElementById('passphrase');
+const error = document.getElementById('error');
+
+input.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    if (input.value === PASS) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('board').style.display = 'block';
+      document.getElementById('nav').classList.add('visible');
+      initNav();
+    } else {
+      error.classList.add('show');
+      input.value = '';
+      setTimeout(() => error.classList.remove('show'), 1500);
+    }
+  }
+});
+
+function initNav() {
+  const slides = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  slides.forEach((s) => {
+    const d = document.createElement('div');
+    d.className = 'nav-dot';
+    d.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+    nav.appendChild(d);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const i = Array.from(slides).indexOf(e.target);
+        document.querySelectorAll('.nav-dot').forEach((d, j) => d.classList.toggle('active', i === j));
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => obs.observe(s));
+}
+</script>
+
+</body>
+</html>
