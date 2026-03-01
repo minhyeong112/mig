@@ -66,6 +66,10 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 
 .slide-header { margin-bottom: 0; }
 
+.slide-title.hero {
+  font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 600; line-height: 1.1;
+}
+
 .slide-title {
   font-family: var(--serif); font-weight: 300; font-size: clamp(1.8rem, 5vw, 2.6rem);
   color: var(--text); line-height: 1.2; margin-bottom: 24px;
@@ -196,7 +200,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
     <div class="slide-inner">
       <div class="slide-header">
         <div class="slide-label">2026 Vision Board</div>
-        <div class="slide-title">Focus on the "Hell Yeses" and Say No to Everything Else</div>
+        <div class="slide-title hero">Focus on the "Hell Yeses" and Say No to Everything Else</div>
       </div>
       <div class="slide-split">
         <div class="slide-media">
@@ -434,11 +438,13 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 
   <div class="slide" data-slide="8">
     <div class="slide-inner centered">
-      <div class="slide-title">2026 Goals</div>
-      <div class="slide-body" style="text-align:center; margin-top:16px;">
-        <p><strong>HEALTH:</strong> best health of my life</p>
-        <p><strong>WEALTH:</strong> most wealth of my life</p>
-        <p><strong>RELATIONSHIPS:</strong> healthiest relationships of my life</p>
+      <div class="slide-title hero" style="margin-bottom: 32px;">2026 Goals</div>
+      <div class="slide-body" style="margin-top:0; font-size: 1.1rem; line-height: 2.2;">
+        <table style="border-collapse:collapse; margin:0 auto; text-align:left;">
+          <tr><td style="padding:6px 16px 6px 0; font-weight:600; color:var(--text); letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; vertical-align:top;">HEALTH</td><td style="padding:6px 0; color:var(--text-mid);">best health of my life</td></tr>
+          <tr><td style="padding:6px 16px 6px 0; font-weight:600; color:var(--text); letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; vertical-align:top;">WEALTH</td><td style="padding:6px 0; color:var(--text-mid);">most wealth of my life</td></tr>
+          <tr><td style="padding:6px 16px 6px 0; font-weight:600; color:var(--text); letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; vertical-align:top;">RELATIONSHIPS</td><td style="padding:6px 0; color:var(--text-mid);">healthiest relationships of my life</td></tr>
+        </table>
       </div>
     </div>
   </div>
