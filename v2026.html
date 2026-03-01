@@ -147,6 +147,30 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   transition: opacity 1s; pointer-events: none;
 }
 .swipe-hint.gone { opacity: 0; }
+
+/* ── Desktop: image left, text right ── */
+@media (min-width: 769px) {
+  .slide-inner {
+    flex-direction: row; align-items: center; gap: 40px;
+    max-width: 1060px; padding: 40px 48px 100px;
+  }
+  .slide-inner .slide-media {
+    flex: 0 0 45%; min-width: 0;
+  }
+  .slide-inner .slide-text {
+    flex: 1; min-width: 0;
+  }
+  /* Remove bottom margin on images in desktop split */
+  .slide-inner .slide-media .slide-img-placeholder,
+  .slide-inner .slide-media .slide-img-grid {
+    margin-bottom: 0;
+  }
+  /* Closing slide stays centered */
+  .slide-inner.centered {
+    flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; max-width: 640px;
+  }
+}
 </style>
 </head>
 <body>
@@ -161,14 +185,18 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 1: Title -->
   <div class="slide" data-slide="0">
     <div class="slide-inner">
-      <div class="slide-label">2026 Vision Board</div>
-      <div class="slide-title">Establish the "Big Yeses" and Say No to Everything Else</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: On the left, a jar almost full with sand, big rocks that don't fit and overflow. On the right, the same jar but with the big rocks in first, then the sand fits in the crevices. The lesson is to put the big rocks in first.</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: On the left, a jar almost full with sand, big rocks that don't fit and overflow. On the right, the same jar but with the big rocks in first, then the sand fits in the crevices. The lesson is to put the big rocks in first.</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>Put the big rocks in first.</strong></p>
-        <p>Say yes to the few things that matter. Do what excites and put attention where you have agency.</p>
+      <div class="slide-text">
+        <div class="slide-label">2026 Vision Board</div>
+        <div class="slide-title">Establish the "Big Yeses" and Say No to Everything Else</div>
+        <div class="slide-body">
+          <p><strong>Put the big rocks in first.</strong></p>
+          <p>Say yes to the few things that matter. Do what excites and put attention where you have agency.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -176,20 +204,24 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 2: Starting Point -->
   <div class="slide" data-slide="1">
     <div class="slide-inner">
-      <div class="slide-label">Where I Am</div>
-      <div class="slide-title">Starting Point</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: Overhead photo of a clean minimal desk with a single open notebook, a cup of tea, and a Bangkok skyline through a window, natural morning light, warm tones</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: Overhead photo of a clean minimal desk with a single open notebook, a cup of tea, and a Bangkok skyline through a window, natural morning light, warm tones</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>Officially debt free.</strong> Previous business mistakes are behind me.</p>
-        <ul>
-          <li>1-year lease in Bangkok, 2 bedroom apartment, fully set up</li>
-          <li>Reduced all client workload under AskMiguel.ai</li>
-          <li>Going all-in on <strong>Humanity Labs</strong></li>
-          <li>Thai girlfriend I care about. Fewer, deeper relationships</li>
-          <li>Saying no to more, saying yes to few things when it counts</li>
-        </ul>
+      <div class="slide-text">
+        <div class="slide-label">Where I Am</div>
+        <div class="slide-title">Starting Point</div>
+        <div class="slide-body">
+          <p><strong>Officially debt free.</strong> Previous business mistakes are behind me.</p>
+          <ul>
+            <li>1-year lease in Bangkok, 2 bedroom apartment, fully set up</li>
+            <li>Reduced all client workload under AskMiguel.ai</li>
+            <li>Going all-in on <strong>Humanity Labs</strong></li>
+            <li>Thai girlfriend I care about. Fewer, deeper relationships</li>
+            <li>Saying no to more, saying yes to few things when it counts</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -197,21 +229,25 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 3: Humanity Labs -->
   <div class="slide" data-slide="2">
     <div class="slide-inner">
-      <div class="slide-label">The Mission</div>
-      <div class="slide-title">Miguel @ Humanity Labs</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: Two people shaking hands across a minimal table with a single document between them, clean white office, warm natural light, shot from slightly above, editorial style</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: Two people shaking hands across a minimal table with a single document between them, clean white office, warm natural light, shot from slightly above, editorial style</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>Before March 4:</strong> Establish a real working agreement with Humanity Labs.</p>
-        <ul>
-          <li>Actual employment on paper. Proof of income for VA home loan</li>
-          <li>Salary I'm excited about. Mix of cash + equity, leaning cash-heavy</li>
-          <li>Big upfront chunk if possible. Ride the debt-free momentum</li>
-          <li>Open to James's experience on structuring equity</li>
-          <li>Not here to extract. Here for the long haul and life's work</li>
-        </ul>
-        <p><strong>Context:</strong> Agency can do $0-30K/month but requires jobs I don't love and too much context switching. Trading that for focus. When we get traction would love to see $20K months, then $50K months, then 6-figure months.</p>
+      <div class="slide-text">
+        <div class="slide-label">The Mission</div>
+        <div class="slide-title">Miguel @ Humanity Labs</div>
+        <div class="slide-body">
+          <p><strong>Before March 4:</strong> Establish a real working agreement with Humanity Labs.</p>
+          <ul>
+            <li>Actual employment on paper. Proof of income for VA home loan</li>
+            <li>Salary I'm excited about. Mix of cash + equity, leaning cash-heavy</li>
+            <li>Big upfront chunk if possible. Ride the debt-free momentum</li>
+            <li>Open to James's experience on structuring equity</li>
+            <li>Not here to extract. Here for the long haul and life's work</li>
+          </ul>
+          <p><strong>Context:</strong> Agency can do $0-30K/month but requires jobs I don't love and too much context switching. Trading that for focus. When we get traction would love to see $20K months, then $50K months, then 6-figure months.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -219,21 +255,25 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 4: Miami -->
   <div class="slide" data-slide="3">
     <div class="slide-inner">
-      <div class="slide-label">Q1</div>
-      <div class="slide-title">Miami: Family & Real Estate</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: Art deco Miami apartment building with palm trees, golden hour light, clean architectural photography style, blue sky, warm pastel tones, no people</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: Art deco Miami apartment building with palm trees, golden hour light, clean architectural photography style, blue sky, warm pastel tones, no people</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>One month in Miami with 3 goals:</strong></p>
-        <ul>
-          <li>Insane work output</li>
-          <li><strong>Bond with family</strong></li>
-          <li><strong>Get a quadplex with tenants using VA home loan</strong></li>
-          <li>Leverage Miami network and real estate connections</li>
-          <li>Document the process to rinse and repeat annually</li>
-        </ul>
-        <p class="sub">Strategy: 1 quadplex per year using VA loan. Build passive income while focused on Humanity Labs.</p>
+      <div class="slide-text">
+        <div class="slide-label">Q1</div>
+        <div class="slide-title">Miami: Family & Real Estate</div>
+        <div class="slide-body">
+          <p><strong>One month in Miami with 3 goals:</strong></p>
+          <ul>
+            <li>Insane work output</li>
+            <li><strong>Bond with family</strong></li>
+            <li><strong>Get a quadplex with tenants using VA home loan</strong></li>
+            <li>Leverage Miami network and real estate connections</li>
+            <li>Document the process to rinse and repeat annually</li>
+          </ul>
+          <p class="sub">Strategy: 1 quadplex per year using VA loan. Build passive income while focused on Humanity Labs.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -241,17 +281,21 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 5: Back to Thailand -->
   <div class="slide" data-slide="4">
     <div class="slide-inner">
-      <div class="slide-label">Songkran Season</div>
-      <div class="slide-title">Back in Thailand</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: A person on a vintage scooter driving through a tree-lined Bangkok street, Songkran water splashing gently in background, golden afternoon light, cinematic street photography</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: A person on a vintage scooter driving through a tree-lined Bangkok street, Songkran water splashing gently in background, golden afternoon light, cinematic street photography</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <ul>
-          <li>Buy a cool scooter</li>
-          <li>Optimal health systems for deep work on Humanity Labs products. Ship ship ship</li>
-          <li>Deepen relationship with girlfriend</li>
-        </ul>
+      <div class="slide-text">
+        <div class="slide-label">Songkran Season</div>
+        <div class="slide-title">Back in Thailand</div>
+        <div class="slide-body">
+          <ul>
+            <li>Buy a cool scooter</li>
+            <li>Optimal health systems for deep work on Humanity Labs products. Ship ship ship</li>
+            <li>Deepen relationship with girlfriend</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -259,43 +303,47 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 6: Experiences -->
   <div class="slide" data-slide="5">
     <div class="slide-inner">
-      <div class="slide-label">Sprinkled In</div>
-      <div class="slide-title">Cool Experiences, Tied to Relationships</div>
-      <div class="slide-img-grid">
-        <div>
-          <div class="grid-cell">
-            <p>PROMPT: A family of four exploring a vibrant Asian night market, warm string lights overhead, candid moment of laughter, soft bokeh background, editorial travel photography</p>
+      <div class="slide-media">
+        <div class="slide-img-grid">
+          <div>
+            <div class="grid-cell">
+              <p>PROMPT: A family of four exploring a vibrant Asian night market, warm string lights overhead, candid moment of laughter, soft bokeh background, editorial travel photography</p>
+            </div>
+            <div class="grid-label">Family in Asia</div>
           </div>
-          <div class="grid-label">Family in Asia</div>
-        </div>
-        <div>
-          <div class="grid-cell">
-            <p>PROMPT: A massive festival stage with colorful lights and confetti at night, crowd silhouettes with hands up, Tomorrowland-style fantasy stage design, cinematic wide shot, vibrant colors</p>
+          <div>
+            <div class="grid-cell">
+              <p>PROMPT: A massive festival stage with colorful lights and confetti at night, crowd silhouettes with hands up, Tomorrowland-style fantasy stage design, cinematic wide shot, vibrant colors</p>
+            </div>
+            <div class="grid-label">Tomorrowland</div>
           </div>
-          <div class="grid-label">Tomorrowland</div>
-        </div>
-        <div>
-          <div class="grid-cell">
-            <p>PROMPT: Couple exploring a scenic destination together, warm golden light, candid travel moment, soft background</p>
+          <div>
+            <div class="grid-cell">
+              <p>PROMPT: Couple exploring a scenic destination together, warm golden light, candid travel moment, soft background</p>
+            </div>
+            <div class="grid-label">Trips with GF</div>
           </div>
-          <div class="grid-label">Trips with GF</div>
-        </div>
-        <div>
-          <div class="grid-cell">
-            <p>PROMPT: Group of friends on an adventure trip, laughing together, dramatic landscape backdrop, editorial travel photography</p>
+          <div>
+            <div class="grid-cell">
+              <p>PROMPT: Group of friends on an adventure trip, laughing together, dramatic landscape backdrop, editorial travel photography</p>
+            </div>
+            <div class="grid-label">Boys Trips</div>
           </div>
-          <div class="grid-label">Boys Trips</div>
         </div>
       </div>
-      <div class="slide-body">
-        <ul>
-          <li>Invite parents and sister to Asia in late summer. Shared experiences over material gifts</li>
-          <li>Regular short trips with girlfriend: China in April? Miami?</li>
-          <li>Boys trips: Seoul? Trans-Siberian? Turkey?</li>
-          <li>Another continent</li>
-          <li>Tomorrowland + Wonderfruit Pattaya in December</li>
-        </ul>
-        <p class="sub">Balancing family, bros, mentors, colleagues, girlfriend</p>
+      <div class="slide-text">
+        <div class="slide-label">Sprinkled In</div>
+        <div class="slide-title">Cool Experiences, Tied to Relationships</div>
+        <div class="slide-body">
+          <ul>
+            <li>Invite parents and sister to Asia in late summer. Shared experiences over material gifts</li>
+            <li>Regular short trips with girlfriend: China in April? Miami?</li>
+            <li>Boys trips: Seoul? Trans-Siberian? Turkey?</li>
+            <li>Another continent</li>
+            <li>Tomorrowland + Wonderfruit Pattaya in December</li>
+          </ul>
+          <p class="sub">Balancing family, bros, mentors, colleagues, girlfriend</p>
+        </div>
       </div>
     </div>
   </div>
@@ -303,27 +351,31 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 7: Mid-Term -->
   <div class="slide" data-slide="6">
     <div class="slide-inner">
-      <div class="slide-label">2-5 Year Horizon</div>
-      <div class="slide-title">Mid-Term</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: Aerial view of Miami waterfront quadplex apartments next to turquoise water, golden hour drone photography, clean geometric buildings, palm trees, luxury real estate aesthetic</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: Aerial view of Miami waterfront quadplex apartments next to turquoise water, golden hour drone photography, clean geometric buildings, palm trees, luxury real estate aesthetic</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>Real estate machine:</strong></p>
-        <ul>
-          <li>1 quadplex per year in Miami using VA loan</li>
-          <li>Rinse and repeat the same strategy with existing network</li>
-          <li>Passive income compounds while Humanity Labs grows</li>
-        </ul>
-        <p><strong>Humanity Labs:</strong></p>
-        <ul>
-          <li>Products with real traction and recurring revenue</li>
-          <li>$20K, then $50K, then 6-figure months</li>
-          <li>Life's work, not a gig</li>
-        </ul>
-        <p><strong>Dream net worth:</strong></p>
-        <span class="metric">$10M</span>
-        <p>Enough.</p>
+      <div class="slide-text">
+        <div class="slide-label">2-5 Year Horizon</div>
+        <div class="slide-title">Mid-Term</div>
+        <div class="slide-body">
+          <p><strong>Real estate machine:</strong></p>
+          <ul>
+            <li>1 quadplex per year in Miami using VA loan</li>
+            <li>Rinse and repeat the same strategy with existing network</li>
+            <li>Passive income compounds while Humanity Labs grows</li>
+          </ul>
+          <p><strong>Humanity Labs:</strong></p>
+          <ul>
+            <li>Products with real traction and recurring revenue</li>
+            <li>$20K, then $50K, then 6-figure months</li>
+            <li>Life's work, not a gig</li>
+          </ul>
+          <p><strong>Dream net worth:</strong></p>
+          <span class="metric">$10M</span>
+          <p>Enough.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -331,27 +383,31 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   <!-- SLIDE 8: Side Quests -->
   <div class="slide" data-slide="7">
     <div class="slide-inner">
-      <div class="slide-label">Doors to Leave Open</div>
-      <div class="slide-title">Side Quests</div>
-      <div class="slide-img-placeholder">
-        <p>PROMPT: A DJ mixing board with headphones in a minimal home studio, warm ambient lighting, books on shelf in background, moody creative workspace, shallow depth of field</p>
+      <div class="slide-media">
+        <div class="slide-img-placeholder">
+          <p>PROMPT: A DJ mixing board with headphones in a minimal home studio, warm ambient lighting, books on shelf in background, moody creative workspace, shallow depth of field</p>
+        </div>
       </div>
-      <div class="slide-body">
-        <p><strong>Things to explore. Not goals, but doors to leave open:</strong></p>
-        <ul>
-          <li><strong>AI/Tech:</strong> Stay on the cutting edge. Tinker. Build weird things for fun.</li>
-          <li><strong>DJ side quest:</strong> Play cool sets.</li>
-          <li><strong>Design:</strong> Formally learn web design, branding, visual craft.</li>
-          <li><strong>Aesthetic upgrade:</strong> Nicer clothes, visuals, furniture, accessories. Minimalist but intentional. Only spend when it matters.</li>
-        </ul>
-        <p class="sub">Feed creativity.</p>
+      <div class="slide-text">
+        <div class="slide-label">Doors to Leave Open</div>
+        <div class="slide-title">Side Quests</div>
+        <div class="slide-body">
+          <p><strong>Things to explore. Not goals, but doors to leave open:</strong></p>
+          <ul>
+            <li><strong>AI/Tech:</strong> Stay on the cutting edge. Tinker. Build weird things for fun.</li>
+            <li><strong>DJ side quest:</strong> Play cool sets.</li>
+            <li><strong>Design:</strong> Formally learn web design, branding, visual craft.</li>
+            <li><strong>Aesthetic upgrade:</strong> Nicer clothes, visuals, furniture, accessories. Minimalist but intentional. Only spend when it matters.</li>
+          </ul>
+          <p class="sub">Feed creativity.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- SLIDE 9: Closing -->
   <div class="slide" data-slide="8">
-    <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
+    <div class="slide-inner centered">
       <div class="slide-title" style="font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: 6px; color: var(--text-light);">
         HEALTH &nbsp;·&nbsp; WEALTH &nbsp;·&nbsp; RELATIONSHIPS
       </div>
