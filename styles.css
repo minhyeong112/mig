@@ -1,9 +1,6 @@
-@font-face {
-    font-family: 'Neue Machina';
-    src: url('PPNeueMachina-InktrapRegular.otf') format('opentype');
-}
-
 :root {
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
     --background: #fff;
     --text: #111111;
     --dark-background: #111111;
@@ -26,7 +23,7 @@
     --max-width: 560px;
     --line-height-th-content: 1.935;
     --photo-height: 100vh;
-    --font-family: 'Neue Machina', sans-serif;
+    --font-family: var(--sans);
     --text-color: #000; /* Standard color for section titles (adjust as needed) */
     --text-hover-color: #333; /* Hover color for section titles (adjust as needed) */
 }
@@ -127,7 +124,7 @@ body {
     line-height: 1.8;
     display: flex;
     justify-content: center;
-    font-family: 'Neue Machina', sans-serif;
+    font-family: var(--sans);
     font-size: var(--f-size);
     color: var(--text);
     background: var(--background);
@@ -347,7 +344,7 @@ figcaption {
     outline: none;
     font-size: calc(var(--f-size) * var(--scale-m));
     transition: background-color 0.4s, color 0.4s;
-    font-family: 'Neue Machina', sans-serif;
+    font-family: var(--sans);
     border-bottom: 1px solid var(--line);
   }
   
