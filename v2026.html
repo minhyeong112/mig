@@ -241,8 +241,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
       <div class="slide-split">
         <div class="slide-media">
           <!-- Net worth graph with embedded screenshots -->
-          <!-- Taller viewBox: 500x380. X: 70+month*13 | Y: +300K=30, 0=170, -300K=310 -->
-          <!-- Year ticks: Jan'24=m5(135), Jan'25=m17(291), Jan'26=m29(447) -->
+          <!-- X: 70+month*13 | Y: +300K=30, 0=170, -300K=310 -->
           <svg class="slide2-graph" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="slide2red" x1="0" y1="0" x2="0" y2="1">
@@ -253,15 +252,12 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
                 <stop offset="0%" stop-color="#2BA8A0" stop-opacity="0.08"/>
                 <stop offset="100%" stop-color="#2BA8A0" stop-opacity="0.3"/>
               </linearGradient>
-              <!-- Clip paths for rounded screenshot corners -->
-              <clipPath id="clip-left"><rect x="68" y="40" width="130" height="110" rx="5"/></clipPath>
-              <clipPath id="clip-right"><rect x="310" y="40" width="170" height="110" rx="5"/></clipPath>
+              <clipPath id="clip-left"><rect x="95" y="32" width="95" height="132" rx="4"/></clipPath>
+              <clipPath id="clip-right"><rect x="330" y="32" width="125" height="132" rx="4"/></clipPath>
             </defs>
-            <!-- Embedded screenshots -->
-            <image href="img/slide2-sept2023.png" x="68" y="40" width="130" height="110" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-left)" opacity="0.9"/>
-            <rect x="68" y="40" width="130" height="110" rx="5" fill="none" stroke="var(--border)" stroke-width="0.5"/>
-            <image href="img/slide2-credit.png" x="310" y="40" width="170" height="110" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-right)" opacity="0.9"/>
-            <rect x="310" y="40" width="170" height="110" rx="5" fill="none" stroke="var(--border)" stroke-width="0.5"/>
+            <!-- Embedded screenshots (full height, meet not slice) -->
+            <image href="img/slide2-sept2023.png" x="95" y="32" width="95" height="132" preserveAspectRatio="xMidYMid meet" clip-path="url(#clip-left)" opacity="0.85"/>
+            <image href="img/slide2-credit.png" x="330" y="32" width="125" height="132" preserveAspectRatio="xMidYMid meet" clip-path="url(#clip-right)" opacity="0.85"/>
             <!-- Grid lines -->
             <line x1="62" y1="30" x2="460" y2="30" stroke="#e8e8e8" stroke-width="0.5"/>
             <line x1="62" y1="170" x2="460" y2="170" stroke="#ccc" stroke-width="1"/>
@@ -270,13 +266,15 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <text x="56" y="34" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">+$300K</text>
             <text x="56" y="174" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">$0</text>
             <text x="56" y="314" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">-$300K</text>
-            <!-- Year tick marks on bottom axis -->
+            <!-- X-axis: all labels on bottom line, consistent style -->
+            <text x="76" y="330" text-anchor="middle" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">SEP</text>
             <line x1="135" y1="310" x2="135" y2="318" stroke="#bbb" stroke-width="1"/>
             <text x="135" y="330" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'24</text>
             <line x1="291" y1="310" x2="291" y2="318" stroke="#bbb" stroke-width="1"/>
             <text x="291" y="330" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'25</text>
             <line x1="447" y1="310" x2="447" y2="318" stroke="#bbb" stroke-width="1"/>
             <text x="447" y="330" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'26</text>
+            <text x="460" y="330" text-anchor="start" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">FEB</text>
             <!-- Green area: above zero -->
             <polygon points="70,30 70,170 83,170" fill="url(#slide2green)"/>
             <!-- Red area: below zero -->
@@ -295,10 +293,6 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <circle cx="460" cy="170" r="4" fill="#2BA8A0"/>
             <!-- Annotation: crash (next to the slope) -->
             <text x="92" y="168" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.75">-$600K in 1 week</text>
-            <!-- X-axis labels -->
-            <text x="76" y="330" text-anchor="middle" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">SEP</text>
-            <!-- FEB label above the line to avoid colliding with '26 tick -->
-            <text x="460" y="162" text-anchor="end" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">FEB</text>
           </svg>
         </div>
         <div class="slide-body-wrap">
