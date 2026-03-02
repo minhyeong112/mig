@@ -282,13 +282,13 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <text x="56" y="24" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">+$300K</text>
             <text x="56" y="114" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">$0</text>
             <text x="56" y="204" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">-$300K</text>
-            <!-- Year tick marks on x-axis -->
-            <line x1="135" y1="106" x2="135" y2="114" stroke="#bbb" stroke-width="1"/>
-            <text x="135" y="124" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'24</text>
-            <line x1="291" y1="106" x2="291" y2="114" stroke="#bbb" stroke-width="1"/>
-            <text x="291" y="124" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'25</text>
-            <line x1="447" y1="106" x2="447" y2="114" stroke="#bbb" stroke-width="1"/>
-            <text x="447" y="124" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'26</text>
+            <!-- Year tick marks on bottom axis -->
+            <line x1="135" y1="200" x2="135" y2="208" stroke="#bbb" stroke-width="1"/>
+            <text x="135" y="218" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'24</text>
+            <line x1="291" y1="200" x2="291" y2="208" stroke="#bbb" stroke-width="1"/>
+            <text x="291" y="218" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'25</text>
+            <line x1="447" y1="200" x2="447" y2="208" stroke="#bbb" stroke-width="1"/>
+            <text x="447" y="218" text-anchor="middle" fill="#aaa" font-size="8" font-family="Inter, sans-serif" letter-spacing="1.5">'26</text>
             <!-- Green area: above zero (Aug'23 +300K to crash) -->
             <polygon points="70,20 70,110 83,110" fill="url(#slide2green)"/>
             <!-- Red area: below zero line to the curve -->
@@ -307,8 +307,8 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <!-- Data points -->
             <circle cx="70" cy="20" r="4" fill="#2BA8A0"/>
             <circle cx="83" cy="200" r="4" fill="#c44"/>
-            <!-- Annotation: crash -->
-            <text x="130" y="150" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.7">-$600K in 1 week</text>
+            <!-- Annotation: crash (next to the slope) -->
+            <text x="92" y="108" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.75">-$600K in 1 week</text>
             <!-- X-axis labels (month only, no year — years shown by ticks) -->
             <text x="76" y="218" text-anchor="middle" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">SEP</text>
             <text x="460" y="218" text-anchor="end" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">FEB</text>
