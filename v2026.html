@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>2026 Vision Board</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<!-- Preload all slide images -->
+<link rel="preload" as="image" href="img/slide1-rocks.png">
+<link rel="preload" as="image" href="img/slide2-sept2023.png">
+<link rel="preload" as="image" href="img/slide2-networth2026.jpg">
+<link rel="preload" as="image" href="img/slide2-creditscore.jpg">
+<link rel="preload" as="image" href="img/slide3-humanitylabs.png">
+<link rel="preload" as="image" href="img/slide4-miami.png">
+<link rel="preload" as="image" href="img/slide5-thailand.png">
+<link rel="preload" as="image" href="img/slide6-experiences.png">
+<link rel="preload" as="image" href="img/slide7-midterm.png">
+<link rel="preload" as="image" href="img/slide8-sidequests.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Inter:wght@300;400;500&display=swap');
 
@@ -128,7 +139,38 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 .slide2-graph {
   width: 100%; max-width: 480px; margin-bottom: 16px;
 }
-/* (slide2 screenshots now embedded in SVG) */
+/* ── Locked sections ── */
+.locked-section {
+  position: relative;
+}
+.locked-section .locked-content {
+  filter: blur(12px); pointer-events: none; user-select: none;
+  transition: filter 0.4s ease;
+}
+.locked-section.unlocked .locked-content {
+  filter: none; pointer-events: auto; user-select: auto;
+}
+.locked-section .lock-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: opacity 0.3s;
+}
+.locked-section.unlocked .lock-overlay {
+  opacity: 0; pointer-events: none;
+}
+.lock-prompt {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(4px);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 14px;
+}
+.lock-prompt svg { width: 14px; height: 14px; color: var(--text-light); flex-shrink: 0; }
+.lock-prompt input {
+  background: transparent; border: none; outline: none;
+  font-family: var(--sans); font-size: 0.8rem; color: var(--text);
+  width: 100px; letter-spacing: 2px;
+}
+.lock-prompt input::placeholder { color: #ccc; letter-spacing: 1px; font-size: 0.75rem; }
 
 /* ── Nav ── */
 .nav-bar {
@@ -240,6 +282,9 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
       </div>
       <div class="slide-split">
         <div class="slide-media">
+          <div class="locked-section" data-lock="sensitive">
+          <div class="lock-overlay"><div class="lock-prompt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><input type="password" placeholder="passphrase" class="lock-input"></div></div>
+          <div class="locked-content">
           <!-- Net worth graph with embedded screenshots -->
           <!-- X: 70+month*13 | Y: +300K=30, 0=170, -300K=310 -->
           <svg class="slide2-graph" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
@@ -299,6 +344,8 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <!-- Annotation: crash (below the slope line) -->
             <text x="92" y="195" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.75">-$600K in 1 week</text>
           </svg>
+          </div><!-- /locked-content -->
+          </div><!-- /locked-section -->
         </div>
         <div class="slide-body-wrap">
           <div class="slide-body">
@@ -325,6 +372,9 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
           <img class="slide-img" src="img/slide3-humanitylabs.png" alt="Humanity Labs">
         </div>
         <div class="slide-body-wrap">
+          <div class="locked-section" data-lock="sensitive">
+          <div class="lock-overlay"><div class="lock-prompt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><input type="password" placeholder="passphrase" class="lock-input"></div></div>
+          <div class="locked-content">
           <div class="slide-body">
             <p>Before March 4, codify working agreement with Humanity Labs.</p>
             <ul>
@@ -339,6 +389,8 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             </ul>
             <p><strong>Context:</strong> Agency can do $0-30K/month but requires jobs I don't love and too much context switching. Trading that for focus. When we get traction, I'd love to see $20k/m -> $50k/m -> $100k/m...</p>
           </div>
+          </div><!-- /locked-content -->
+          </div><!-- /locked-section -->
         </div>
       </div>
     </div>
@@ -549,6 +601,21 @@ function initDeck() {
 
   // Hide hint after first nav
   setTimeout(() => document.getElementById('hint').classList.add('gone'), 4000);
+
+  // Unlock sensitive sections
+  document.querySelectorAll('.lock-input').forEach(input => {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        if (input.value === PASS) {
+          input.closest('.locked-section').classList.add('unlocked');
+        } else {
+          input.value = '';
+          input.style.borderBottom = '1px solid #c44';
+          setTimeout(() => input.style.borderBottom = '', 800);
+        }
+      }
+    });
+  });
 
   // Buttons
   document.getElementById('prev-btn').onclick = () => go(current - 1);
