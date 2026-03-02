@@ -260,13 +260,19 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
       </div>
       <div class="slide-split">
         <div class="slide-media">
-          <!-- Net worth graph (to scale: Aug '23=0, Sep '23=1, Feb '26=30 months) -->
-          <!-- X: 70 + month*(380/30) = 70..450  |  Y: +300K=20, 0=110, -300K=200 -->
+          <!-- Net worth graph (to scale: Aug '23=m0, Sep '23=m1, Feb '26=m30) -->
+          <!-- X: 70 + month*(390/30)=13/mo  |  Y: +300K=20, 0=110, -300K=200 -->
           <svg class="slide2-graph" viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="slide2grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#2BA8A0" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#2BA8A0" stop-opacity="0.02"/>
+              <!-- Red fill for below-zero area -->
+              <linearGradient id="slide2red" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c44" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="#c44" stop-opacity="0.25"/>
+              </linearGradient>
+              <!-- Green fill for above-zero area -->
+              <linearGradient id="slide2green" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#2BA8A0" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="#2BA8A0" stop-opacity="0.3"/>
               </linearGradient>
             </defs>
             <!-- Grid lines -->
@@ -277,36 +283,37 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
             <text x="56" y="24" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">+$300K</text>
             <text x="56" y="114" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">$0</text>
             <text x="56" y="204" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">-$300K</text>
-            <!-- Data: Aug'23(m0)=+300K, Sep'23(m1)=-300K, then gradual climb to Feb'26(m30)=0 -->
-            <!-- x: 70+m*13  y: 110 - (val/300000)*90 -->
-            <!-- Aug'23 m0: x=70 y=20 | Sep'23 m1: x=83 y=200 | Dec'23 m4: x=122 y=185 | Jun'24 m10: x=200 y=160 | Dec'24 m16: x=278 y=140 | Jun'25 m22: x=356 y=125 | Feb'26 m30: x=460 y=110 -->
+            <!-- Green area: above zero (Aug'23 +300K down to zero line) -->
+            <polygon points="70,20 70,110 83,110" fill="url(#slide2green)"/>
+            <!-- Red area: below zero (Sep'23 -300K climbing back to 0) -->
+            <!-- Slow climb, then spike at end: m1=-300K, m6=-260K, m12=-210K, m18=-170K, m24=-140K, m27=-110K(crosses 0 late), m30=0 -->
+            <!-- But actually ends at 0, so the below-zero area is everything below the line AND below y=110 -->
+            <!-- Points below zero: m1(83,200) m6(148,178) m12(226,158) m18(304,143) m24(382,135) m27(421,125) then crosses zero ~m28.5 -->
+            <!-- Spike: slow until ~m26, then sharp rise last ~4 months -->
+            <polygon points="83,110 83,200 148,178 226,158 304,143 382,135 421,125 440,115 447,110" fill="url(#slide2red)"/>
+            <!-- Green area above zero for the final spike portion -->
+            <polygon points="447,110 453,106 460,100 460,110" fill="url(#slide2green)"/>
+            <!-- The line -->
             <polyline
-              points="70,20 83,200 122,185 200,160 278,140 356,125 460,110"
+              points="70,20 83,200 148,178 226,158 304,143 382,135 421,125 440,115 453,106 460,100"
               fill="none" stroke="#2BA8A0" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <!-- Area fill (above zero positive, below zero negative - simplified single fill) -->
-            <polygon
-              points="70,20 70,110 83,110 83,200 122,185 200,160 278,140 356,125 460,110 460,110"
-              fill="url(#slide2grad)" opacity="0.4"/>
             <!-- Data points -->
             <circle cx="70" cy="20" r="4" fill="#2BA8A0"/>
             <circle cx="83" cy="200" r="4" fill="#c44"/>
-            <circle cx="460" cy="110" r="4" fill="#2BA8A0"/>
+            <circle cx="460" cy="100" r="4" fill="#2BA8A0"/>
             <!-- Annotation: crash -->
-            <text x="100" y="145" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.75">-$600K in 1 week</text>
-            <!-- X-axis labels -->
-            <text x="70" y="222" text-anchor="middle" fill="#888" font-size="10" font-family="Inter, sans-serif">Aug '23</text>
-            <text x="83" y="222" text-anchor="start" fill="#888" font-size="10" font-family="Inter, sans-serif">Sep '23</text>
-            <text x="460" y="222" text-anchor="end" fill="#888" font-size="10" font-family="Inter, sans-serif">Feb '26</text>
+            <text x="120" y="148" fill="#c44" font-size="8.5" font-family="Inter, sans-serif" opacity="0.75">-$600K in 1 week</text>
+            <!-- X-axis labels (all-caps style) -->
+            <text x="76" y="222" text-anchor="middle" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2" text-transform="uppercase">SEP '23</text>
+            <text x="460" y="222" text-anchor="end" fill="#888" font-size="9" font-family="Inter, sans-serif" letter-spacing="2">FEB '26</text>
           </svg>
           <!-- Proof screenshots -->
           <div class="slide2-compare">
             <div class="slide2-col">
               <img src="img/slide2-sept2023.png" alt="September 2023">
-              <span class="slide2-label">Sep 2023</span>
             </div>
             <div class="slide2-col">
               <img src="img/slide2-credit.png" alt="March 2026">
-              <span class="slide2-label">Mar 2026</span>
             </div>
           </div>
         </div>
