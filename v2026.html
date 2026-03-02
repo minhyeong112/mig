@@ -36,24 +36,8 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); }
 
 body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-/* ── Gate ── */
-#gate {
-  height: 100%; display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 20px;
-}
-#gate .year { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--text); letter-spacing: 2px; }
-#gate input {
-  background: transparent; border: none; border-bottom: 1.5px solid var(--border);
-  color: var(--text); padding: 10px 0; font-family: var(--sans); font-size: 1rem;
-  text-align: center; outline: none; width: 180px; letter-spacing: 3px;
-}
-#gate input:focus { border-color: var(--accent); }
-#gate input::placeholder { color: #ccc; letter-spacing: 1px; font-size: 0.85rem; }
-#gate .err { color: #c44; font-size: 0.75rem; height: 1em; opacity: 0; transition: opacity 0.3s; }
-#gate .err.show { opacity: 1; }
-
 /* ── Deck ── */
-#deck { display: none; height: 100%; position: relative; }
+#deck { display: block; height: 100%; position: relative; }
 
 .slide {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -249,11 +233,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 </head>
 <body>
 
-<div id="gate">
-  <div class="year">2026</div>
-  <input type="password" id="pass" placeholder="passphrase" autofocus>
-  <div class="err" id="err">nope</div>
-</div>
+
 
 <div id="deck">
   <div class="slide" data-slide="0">
@@ -548,23 +528,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 </div>
 
 <script>
-// Gate
 const PASS = '123';
-const passInput = document.getElementById('pass');
-const errEl = document.getElementById('err');
-passInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    if (passInput.value === PASS) {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('deck').style.display = 'block';
-      initDeck();
-    } else {
-      errEl.classList.add('show');
-      passInput.value = '';
-      setTimeout(() => errEl.classList.remove('show'), 1200);
-    }
-  }
-});
 
 // Deck
 let current = 0;
@@ -599,7 +563,6 @@ function initDeck() {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(current - 1);
   });
 
-  // Hide hint after first nav
   setTimeout(() => document.getElementById('hint').classList.add('gone'), 4000);
 
   // Unlock sensitive sections
@@ -634,6 +597,9 @@ function go(i) {
   document.getElementById('next-btn').disabled = i === total - 1;
   document.getElementById('hint').classList.add('gone');
 }
+
+// Auto-init
+initDeck();
 </script>
 
 </body>
