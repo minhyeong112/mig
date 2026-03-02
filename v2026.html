@@ -179,6 +179,10 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   .slide-inner .slide-split .slide-media .slide-img-grid {
     margin-bottom: 0;
   }
+  /* Fit tall images within viewport on desktop */
+  .slide-inner .slide-split .slide-media .slide-img {
+    max-height: calc(100vh - 240px); width: auto; max-width: 100%; object-fit: contain;
+  }
   /* Closing slide stays centered */
   .slide-inner.centered {
     flex-direction: column; justify-content: center; align-items: center;
@@ -222,7 +226,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
       </div>
       <div class="slide-split">
         <div class="slide-media">
-          <img class="slide-img" src="img/slide2-credit.png" alt="Credit score and net worth" style="aspect-ratio: auto; object-fit: contain;">
+          <img class="slide-img" src="img/slide2-credit.png" alt="Credit score and net worth" style="aspect-ratio: auto; object-fit: contain; border: 1px solid var(--border); border-radius: 8px;">
         </div>
         <div class="slide-body-wrap">
           <div class="slide-body">
