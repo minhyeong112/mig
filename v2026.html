@@ -156,17 +156,21 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 
 /* ── Desktop: image left, text right ── */
 @media (min-width: 769px) {
+  .slide {
+    overflow-y: hidden;
+  }
   .slide-inner {
     flex-direction: column; align-items: stretch; gap: 0;
-    max-width: 1060px; padding: 100px 48px 100px;
+    max-width: 1060px; padding: 24px 48px 70px;
     justify-content: flex-start;
-    margin-top: 8vh;
+    height: 100%;
   }
   .slide-inner .slide-header {
-    text-align: center; margin-bottom: 32px;
+    text-align: center; margin-bottom: 16px; flex-shrink: 0;
   }
   .slide-inner .slide-split {
-    display: flex; align-items: flex-start; gap: 40px;
+    display: flex; align-items: center; gap: 40px;
+    flex: 1; min-height: 0;
   }
   .slide-inner .slide-split .slide-media {
     flex: 0 0 45%; min-width: 0;
@@ -181,8 +185,9 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
   }
   /* Fit tall images within viewport on desktop */
   .slide-inner .slide-split .slide-media .slide-img {
-    max-height: calc(100vh - 240px); width: auto; max-width: 100%; object-fit: contain;
+    max-height: calc(100vh - 200px); width: auto; max-width: 100%; object-fit: contain;
   }
+  /* Centered closing slide */
   /* Closing slide stays centered */
   .slide-inner.centered {
     flex-direction: column; justify-content: center; align-items: center;
@@ -204,7 +209,7 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
     <div class="slide-inner">
       <div class="slide-header">
         <div class="slide-label">2026 Vision Board</div>
-        <div class="slide-title hero">Focus on the "Hell Yeses" and Say No to Everything Else</div>
+        <div class="slide-title hero">Focus on the "Hell Yeses"<br>...and Say No to Everything Else</div>
       </div>
       <div class="slide-split">
         <div class="slide-media">
