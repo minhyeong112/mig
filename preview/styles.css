@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Machina";
-  src: url("PPNeueMachina-InktrapRegular.otf") format("opentype");
+  src: url("/PPNeueMachina-InktrapRegular.otf") format("opentype");
   font-display: swap;
 }
 
@@ -384,10 +384,32 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
   color: var(--violet-deep);
   font-variant-numeric: tabular-nums;
 }
+.design-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.design-switcher__button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font: 500 1rem/1 var(--display);
+}
+.design-switcher__button:hover { background: var(--acid); color: #111; }
+.design-switcher__button:focus-visible { outline: 3px solid var(--violet-deep); outline-offset: 2px; }
+.design-switcher__status { min-width: 88px; text-align: center; white-space: nowrap; }
 
 @media (max-width: 840px) {
   body::before { opacity: .13; }
-  .wrap { padding: 16px 22px 92px; }
+  .wrap { padding: 16px 22px 150px; }
   .header { grid-template-columns: auto minmax(0, 1fr); gap: 14px; min-height: 64px; }
   .header .home-icon-circle { grid-column: 1; }
   .header .wordmark, .header .page-title { grid-column: 2; }
@@ -432,7 +454,18 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
   .procon { grid-template-columns: 1fr; }
   .pc-col + .pc-col { border-left: 0; border-top: 1px solid var(--ink); }
   .colophon { grid-template-columns: 1fr; }
-  .monthly-redesign { align-items: flex-start; gap: 5px; flex-direction: column; }
+  .monthly-redesign {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 7px 12px;
+    padding: 10px 12px;
+    font-size: .61rem;
+  }
+  .monthly-redesign__message { grid-column: 1; }
+  .monthly-redesign time { grid-column: 2; grid-row: 1; text-align: right; }
+  .design-switcher { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin: 0; }
+  .design-switcher__button { width: 44px; min-width: 44px; height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

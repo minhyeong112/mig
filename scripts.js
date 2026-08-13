@@ -52,10 +52,56 @@
     const banner = document.createElement('aside');
     banner.className = 'monthly-redesign';
     banner.setAttribute('aria-label', 'Monthly website redesign');
-    banner.innerHTML = '<span>This site gets a totally new design every month.</span><time></time>';
+
+    const bannerMessage = document.createElement('span');
+    bannerMessage.className = 'monthly-redesign__message';
+    bannerMessage.textContent = 'This site gets a totally new design every month.';
+
+    const controls = document.createElement('div');
+    controls.className = 'design-switcher';
+    const history = window.WIM_DESIGN_HISTORY;
+    if (history && history.designs.length > 1) {
+      const previous = document.createElement('button');
+      previous.type = 'button';
+      previous.className = 'design-switcher__button';
+      previous.setAttribute('aria-label', 'Show previous website design');
+      previous.textContent = '←';
+
+      const status = document.createElement('span');
+      status.className = 'design-switcher__status';
+      status.setAttribute('aria-live', 'polite');
+
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'design-switcher__button';
+      next.setAttribute('aria-label', 'Show next website design');
+      next.textContent = '→';
+
+      const currentIndex = () => history.designs.findIndex((design) => design.id === document.documentElement.dataset.design);
+      const syncDesignStatus = () => {
+        const index = Math.max(0, currentIndex());
+        status.textContent = `Design ${index + 1} of ${history.designs.length}`;
+      };
+      const chooseDesign = (offset) => {
+        const index = Math.max(0, currentIndex());
+        const selected = history.designs[(index + offset + history.designs.length) % history.designs.length];
+        const stylesheet = document.querySelector('link[data-site-design]');
+        if (!stylesheet) return;
+        stylesheet.href = selected.css;
+        document.documentElement.dataset.design = selected.id;
+        try { sessionStorage.setItem('wimDesign', selected.id); } catch (_) {}
+        syncDesignStatus();
+      };
+      previous.addEventListener('click', () => chooseDesign(-1));
+      next.addEventListener('click', () => chooseDesign(1));
+      controls.append(previous, status, next);
+      syncDesignStatus();
+    }
+
+    const countdown = document.createElement('time');
+    banner.append(bannerMessage, controls, countdown);
     document.body.append(banner);
 
-    const countdown = banner.querySelector('time');
     countdown.dateTime = nextRedesign.toISOString();
     const updateCountdown = () => {
       const remaining = Math.max(0, nextRedesign.getTime() - Date.now());
