@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="light dark">
     <title>Mentors</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" href="../dot.png" type="image/png">
     <script src="../scripts.js" defer></script>
-
+    <script>(function(){try{var s=localStorage.getItem('darkMode');var d=s===null?window.matchMedia('(prefers-color-scheme: dark)').matches:s==='true';if(d)document.documentElement.classList.add('dark-mode');}catch(e){}}());</script>
 
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 </head>
+<body>
 <div class="wrap">
-  <div class="header">
-      <button id="darkModeToggle" class="home-icon-circle"></button>
-      <div class="links">
-          Mentors <span class="update-text">(updated 2mar26)</span>
-      </div>
-  </div>
+    <header class="header">
+        <button id="darkModeToggle" class="home-icon-circle" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+        <span class="wordmark" data-decorative aria-hidden="true">MIG</span>
+        <h1 class="page-title">Mentors <span class="update-text">(updated 2mar26)</span></h1>
+    </header>
 
-    <p class="section"></p>
-    <p><p>
-    
-    I totally agree with Derek's way to <a href="https://sive.rs/ment" target="_blank">ask your mentors for help</a>. In that spirit, here are my current mentors: 
-        
-    <br><br><a href="https://sive.rs/" target="_blank">Derek Sivers</a> for cool ways to think
-    <br><a href="https://tim.blog/" target="_blank">Tim Ferris</a> for lifestyle design
-    <br><a href="https://www.acquisition.com/bio-alex" target="_blank">Alex Hormozi</a> for business
-    <br><a href="https://www.youtube.com/fireship" target="_blank">Jeff Delaney</a> for tech news
-    <br><a href="https://www.jordanbpeterson.com/" target="_blank">Dr. Peterson</a> for learning about personalities
-    <br><a href="https://levels.io/" target="_blank">Pieter Levels</a> for startup advice
-    <br><a href="https://www.youtube.com/@tuckercarlson" target="_blank">Tucker Carlson</a> for politics
-    <br><a href="https://fooledbyrandomness.com/" target="_blank">NNT</a> for philosophy</p></p>
+    <span class="page-num" data-decorative aria-hidden="true">04</span>
 
-    <br><br><br> -Mig
-    <br><a href="../index.html" target="_blank">WhereIsMiguel.com</a>
-    <br>or go back to the <a href="../blog.html">blog</a>.
-    </p></p>
+    <main id="main" tabindex="-1">
+        <section class="entry" id="mentors" data-idx="04">
+            <a class="entry-num" data-decorative aria-hidden="true">04</a>
+            <p class="prose">I totally agree with Derek's way to <a href="https://sive.rs/ment" target="_blank">ask your mentors for help</a>. In that spirit, here are my current mentors:</p>
+            <ul class="index-list">
+                <li><a href="https://sive.rs/" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.1</span>Derek Sivers</a> <span class="row-note">for cool ways to think</span></li>
+                <li><a href="https://tim.blog/" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.2</span>Tim Ferris</a> <span class="row-note">for lifestyle design</span></li>
+                <li><a href="https://www.acquisition.com/bio-alex" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.3</span>Alex Hormozi</a> <span class="row-note">for business</span></li>
+                <li><a href="https://www.youtube.com/fireship" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.4</span>Jeff Delaney</a> <span class="row-note">for tech news</span></li>
+                <li><a href="https://www.jordanbpeterson.com/" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.5</span>Dr. Peterson</a> <span class="row-note">for learning about personalities</span></li>
+                <li><a href="https://levels.io/" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.6</span>Pieter Levels</a> <span class="row-note">for startup advice</span></li>
+                <li><a href="https://www.youtube.com/@tuckercarlson" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.7</span>Tucker Carlson</a> <span class="row-note">for politics</span></li>
+                <li><a href="https://fooledbyrandomness.com/" target="_blank"><span class="entry-num" data-decorative aria-hidden="true">04.8</span>NNT</a> <span class="row-note">for philosophy</span></li>
+            </ul>
+        </section>
 
-
-
+        <footer class="colophon">
+            <p class="sig">-Mig</p>
+            <p><a href="../index.html" target="_blank">WhereIsMiguel.com</a>
+            <br>or go back to the <a href="../blog.html">blog</a>.</p>
+        </footer>
+    </main>
+</div>
+</body>
 </html>

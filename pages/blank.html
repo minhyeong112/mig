@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="light dark">
     <title>Insert Name Here</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" href="../dot.png" type="image/png">
     <script src="../scripts.js" defer></script>
-
+    <script>(function(){try{var s=localStorage.getItem('darkMode');var d=s===null?window.matchMedia('(prefers-color-scheme: dark)').matches:s==='true';if(d)document.documentElement.classList.add('dark-mode');}catch(e){}}());</script>
 
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 </head>
+<body>
 <div class="wrap">
-  <div class="header">
-      <button id="darkModeToggle" class="home-icon-circle"></button>
-      <div class="links">
-          Insert Name Here <span class="update-text">(updated ddmmmyy)</span>
-      </div>
-  </div>
+    <header class="header">
+        <button id="darkModeToggle" class="home-icon-circle" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+        <span class="wordmark" data-decorative aria-hidden="true">MIG</span>
+        <h1 class="page-title">Insert Name Here <span class="update-text">(updated ddmmmyy)</span></h1>
+    </header>
 
-    <p class="section"></p>
-    <p><p>
+    <span class="page-num" data-decorative aria-hidden="true">08</span>
 
-        Insert Text Here
+    <main id="main" tabindex="-1">
+        <section class="entry" id="entry" data-idx="08">
+            <a class="entry-num" data-decorative aria-hidden="true">08</a>
+            <p class="prose">Insert Text Here</p>
+        </section>
 
-    </p></p>
-
-    <br><br><br> -Mig
-    <br><a href="../index.html" target="_blank">WhereIsMiguel.com</a>
-    <br>or go back to the <a href="../blog.html">blog</a>.
-    </p></p>
-
-
-
+        <footer class="colophon">
+            <p class="sig">-Mig</p>
+            <p><a href="../index.html" target="_blank">WhereIsMiguel.com</a>
+            <br>or go back to the <a href="../blog.html">blog</a>.</p>
+        </footer>
+    </main>
+</div>
+</body>
 </html>

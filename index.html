@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="light dark">
     <title>Mig</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,35 +11,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="dot.png" type="image/png">
     <script src="scripts.js" defer></script>
+    <script>(function(){try{var s=localStorage.getItem('darkMode');var d=s===null?window.matchMedia('(prefers-color-scheme: dark)').matches:s==='true';if(d)document.documentElement.classList.add('dark-mode');}catch(e){}}());</script>
 
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 </head>
+<body>
 <div class="wrap">
-  <div class="header">
-      <button id="darkModeToggle" class="home-icon-circle"></button>
-      <div class="links">
-          <a href="blog.html">Blog</a>
-          <a href="https://whereismiguel.com/MigResumev11.pdf" target="_blank">Résumé</a>
-          <a href="https://cal.com/aiguy/hi" target="_blank">Contact</a>
-      </div>
-  </div>
-    <p class="section"></p>
-    <p><p>I'm Miguel, AI Engineer at <a href="https://aiwizards.com/" target="_blank">AIWizards.com</a>.
-    <br>Former Microsoft AI Engineer and U.S. Marine Corps Captain.
-    <br>An over-thinker, loyal friend, extrovert, and slow packer.
-    <br>I love trying new experiences and solving problems.
-    <br>Lived in: Miami, Annapolis, France, Okinawa, Seoul, Baghdad, Joshua Tree, Bangkok.
-    <br>I'd love to chat with you! Please click "Contact" above.
-    </p></p>
+    <header class="header">
+        <button id="darkModeToggle" class="home-icon-circle" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+        <span class="wordmark" data-decorative aria-hidden="true">MIG</span>
+        <nav class="links" aria-label="Site">
+            <a href="blog.html">Blog</a>
+            <a href="https://whereismiguel.com/MigResumev11.pdf" target="_blank">Résumé</a>
+            <a href="https://cal.com/aiguy/hi" target="_blank">Contact</a>
+        </nav>
+    </header>
 
-    <p class="section">Now <span class="update-text">(updated 13aug26)</span></p>
-    <p><p>Growing <a href="https://aiwizards.com/" target="_blank">AIWizards.com</a> and helping people set up general-purpose AI assistants.
-    <br>Recently loving <a href="https://www.whoop.com/us/en/thelocker/introducing-whoop-5-0-and-whoop-mg/" target="_blank">WHOOP</a>, <a href="https://www.monarch.com/" target="_blank">Monarch</a>, and <a href="https://www.granola.ai/" target="_blank">Granola</a>.
-    <br>Self-hosting almost everything else whenever possible, with <a href="https://hermes-agent.nousresearch.com/" target="_blank">Hermes Agent</a> as the operating system. I'm looking forward to building a custom interface for the ultimate setup: one layer to own the data, one to make it intelligent, and one that makes it simple to use.
-    <br>I'm in grind mode bringing private, user-controlled AI to as many people as possible, so they can spend more time on what truly matters.
-    </p></p>
+    <main id="main" tabindex="-1">
+        <section class="entry" id="bio" data-idx="01">
+            <h1 class="prose home-intro">I'm Miguel, AI Engineer at <a href="https://aiwizards.com/" target="_blank">AIWizards.com</a>.
+            <br>Former Microsoft AI Engineer and U.S. Marine Corps Captain.
+            <br>An over-thinker, loyal friend, extrovert, and slow packer.
+            <br>I love trying new experiences and solving problems.
+            <br>Lived in: Miami, Annapolis, France, Okinawa, Seoul, Baghdad, Joshua Tree, Bangkok.
+            <br>I'd love to chat with you! Please click "Contact" above.
+            </h1>
+        </section>
 
+        <section class="entry" id="now" data-idx="02">
+            <h2 class="entry-title">Now <span class="update-text">(updated 13aug26)</span></h2>
+            <p class="prose">Growing <a href="https://aiwizards.com/" target="_blank">AIWizards.com</a> and helping people set up general-purpose AI assistants.
+            <br>Recently loving <a href="https://www.whoop.com/us/en/thelocker/introducing-whoop-5-0-and-whoop-mg/" target="_blank">WHOOP</a>, <a href="https://www.monarch.com/" target="_blank">Monarch</a>, and <a href="https://www.granola.ai/" target="_blank">Granola</a>.
+            <br>Self-hosting almost everything else whenever possible, with <a href="https://hermes-agent.nousresearch.com/" target="_blank">Hermes Agent</a> as the operating system. I'm looking forward to building a custom interface for the ultimate setup: one layer to own the data, one to make it intelligent, and one that makes it simple to use.
+            <br>I'm in grind mode bringing private, user-controlled AI to as many people as possible, so they can spend more time on what truly matters.
+            </p>
+        </section>
+    </main>
+</div>
+</body>
 </html>

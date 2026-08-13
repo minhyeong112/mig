@@ -1,52 +1,51 @@
-document.addEventListener("DOMContentLoaded", function() {
-  // Handle collapsible sections
-  var coll = document.getElementsByClassName("collapsible");
+(() => {
+  'use strict';
 
-  // Reset all content display to none initially (optional)
-  for (var i = 0; i < coll.length; i++) {
-    coll[i].nextElementSibling.style.display = "none";
-  }
+  const ready = (fn) => document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', fn, { once: true })
+    : fn();
 
-  for (var i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("focus", function() {
-      this.classList.add("hover"); // Add hover class on focus
+  ready(() => {
+    const root = document.documentElement;
+    const toggle = document.getElementById('darkModeToggle');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(pointer: fine)');
+
+    const syncTheme = () => {
+      if (toggle) toggle.setAttribute('aria-pressed', root.classList.contains('dark-mode') ? 'true' : 'false');
+    };
+    syncTheme();
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        root.classList.toggle('dark-mode');
+        try { localStorage.setItem('darkMode', String(root.classList.contains('dark-mode'))); } catch (_) {}
+        syncTheme();
+      });
+    }
+
+    let frame = 0;
+    const setPosition = (x, y) => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const nx = Math.max(0, Math.min(1, x / innerWidth));
+        const ny = Math.max(0, Math.min(1, y / innerHeight));
+        root.style.setProperty('--mx', `${(nx * 100).toFixed(2)}%`);
+        root.style.setProperty('--my', `${(ny * 100).toFixed(2)}%`);
+        root.style.setProperty('--ry', `${((nx - .5) * 5).toFixed(2)}deg`);
+        root.style.setProperty('--rx', `${((.5 - ny) * 4).toFixed(2)}deg`);
+      });
+    };
+
+    if (!reduced.matches && finePointer.matches) {
+      window.addEventListener('pointermove', (event) => setPosition(event.clientX, event.clientY), { passive: true });
+      window.addEventListener('pointerleave', () => setPosition(innerWidth / 2, innerHeight / 2), { passive: true });
+    }
+
+    document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+      const rel = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+      rel.add('noopener');
+      link.setAttribute('rel', [...rel].join(' '));
     });
-    coll[i].addEventListener("blur", function() {
-      this.classList.remove("hover"); // Remove hover class on blur
-    });
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      content.style.display = content.style.display === "block" ? "none" : "block";
-    });
-  }
-
-  // Dark mode toggle
-  const darkModeToggle = document.getElementById('darkModeToggle');
-
-  // Check if dark mode preference is saved in localStorage
-  const isDarkMode = localStorage.getItem('darkMode') === 'true';
-  if (isDarkMode) {
-    document.body.classList.add('dark-mode');
-  }
-
-  darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    // Save the dark mode preference in localStorage
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
   });
-});
-
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-  let slides = document.querySelectorAll(".slide");
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 10000); // Change image every 10 seconds
-}
+})();
