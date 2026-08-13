@@ -92,7 +92,7 @@ img, video { max-width: 100%; }
   width: min(100%, 1580px);
   min-height: 100svh;
   margin: 0 auto;
-  padding: 22px clamp(22px, 3.6vw, 64px) 60px;
+  padding: 22px clamp(22px, 3.6vw, 64px) 92px;
 }
 
 .header {
@@ -157,32 +157,8 @@ img, video { max-width: 100%; }
   vertical-align: .8em;
 }
 
-.page-num {
-  position: fixed;
-  z-index: 1;
-  right: -1vw;
-  top: 12vh;
-  font: 400 clamp(12rem, 33vw, 35rem)/.7 var(--display);
-  letter-spacing: -.1em;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 16%, transparent);
-  pointer-events: none;
-  transform: translate3d(calc((var(--mx) - 50%) * -.02), calc((var(--my) - 50%) * -.02), 0);
-}
-
 main { position: relative; z-index: 3; }
 .entry { position: relative; }
-.entry-num {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  margin-bottom: 12px;
-  color: var(--violet-deep);
-  font: 500 .7rem/1 var(--display);
-  letter-spacing: .14em;
-  text-decoration: none;
-}
-.entry-num::before { content: ""; width: 22px; height: 2px; margin-right: 9px; background: currentColor; }
 .entry-title, .entry h2 {
   margin: 0 0 16px;
   font: 400 clamp(1.8rem, 4.1vw, 4.6rem)/.95 var(--display);
@@ -287,8 +263,6 @@ body:has(#pages) .index-list li:nth-child(1) a:hover { background: var(--acid); 
 body:has(#pages) .index-list li:nth-child(2) a:hover { background: var(--violet); color: #fff; transform: translate(8px,-8px); }
 body:has(#pages) .index-list li:nth-child(3) a:hover { background: var(--coral); color: #111; transform: translate(-8px,8px); }
 body:has(#pages) .index-list li:nth-child(4) a:hover { background: var(--aqua); color: #111; transform: translate(8px,8px); }
-body:has(#pages) .index-list .entry-num { margin: 0; order: 2; color: inherit; }
-
 /* Sparse mentor/template pages are poster lists. */
 body:not(:has(.inventory)):not(:has(.procon)):not(:has(.video-container)):not(:has(#bio)):not(:has(#pages)) main { padding-top: clamp(48px, 9vh, 120px); }
 #mentors { max-width: 1160px; }
@@ -305,7 +279,6 @@ body:not(:has(.inventory)):not(:has(.procon)):not(:has(.video-container)):not(:h
 }
 #mentors .index-list li:hover { padding-inline: 18px; background: var(--acid); color: #111; }
 #mentors .index-list a { font: 400 clamp(1.4rem, 3vw, 3rem)/1 var(--display); text-decoration: none; }
-#mentors .index-list .entry-num { margin: 0 10px 0 0; }
 .row-note { color: var(--subtle); font-size: .88rem; letter-spacing: .07em; text-transform: uppercase; }
 
 /* Tools is an open specimen sheet rather than cards. */
@@ -358,7 +331,6 @@ body:has(.procon) .entry > .prose { max-width: 810px; font-size: clamp(1.05rem, 
 .gallery:focus-visible { outline-offset: 8px; }
 
 body:has(.video-container) .entry { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(310px, 1.2fr); gap: clamp(26px, 5vw, 78px); align-items: center; }
-body:has(.video-container) .entry > .entry-num { grid-column: 1 / -1; margin-bottom: -12px; }
 body:has(.video-container) .entry > .prose { font: 400 clamp(1.2rem, 2vw, 1.85rem)/1.44 var(--serif); }
 .video-container { min-width: 0; position: relative; margin: 0; }
 .video-container + .video-container { grid-column: 2; }
@@ -387,17 +359,41 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
 .sig { margin: 0; font: 400 clamp(4rem, 10vw, 10rem)/.7 var(--display); color: var(--violet); }
 .colophon p { margin: 0; }
 
+.monthly-redesign {
+  position: fixed;
+  z-index: 60;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 14px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  font: 500 .7rem/1.25 var(--display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.monthly-redesign time {
+  flex: none;
+  color: var(--violet-deep);
+  font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 840px) {
   body::before { opacity: .13; }
-  .wrap { padding: 16px 22px 46px; }
+  .wrap { padding: 16px 22px 92px; }
   .header { grid-template-columns: auto minmax(0, 1fr); gap: 14px; min-height: 64px; }
   .header .home-icon-circle { grid-column: 1; }
   .header .wordmark, .header .page-title { grid-column: 2; }
   .header .links { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; border-top: 1px solid var(--hairline); }
   .wordmark { font-size: 2.7rem; }
   .page-title { font-size: clamp(2.2rem, 11vw, 5rem); }
-  .page-num { top: 21vh; }
-
   body:has(#bio) .wrap { display: block; }
   body:has(#bio) .header { grid-template-columns: auto 1fr; }
   body:has(#bio) .links { grid-column: 1 / -1; }
@@ -421,7 +417,7 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
 
   body:has(.procon) .entry:nth-of-type(n), body:has(.video-container) .entry:nth-of-type(n) { transform: none; }
   body:has(.video-container) .entry { grid-template-columns: 1fr; }
-  body:has(.video-container) .entry > .entry-num, .video-container + .video-container { grid-column: 1; }
+  .video-container + .video-container { grid-column: 1; }
   .video-container + .video-container { margin-top: 10px; }
 }
 
@@ -430,18 +426,18 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
   .links a { font-size: .66rem; }
   body:has(#bio) main { padding-top: 38px; }
   body:has(#bio) .entry { padding: 28px 22px; box-shadow: 8px 8px 0 var(--ink); clip-path: none; transform: none; }
-  body:has(#bio) .entry-num { margin-bottom: 8px; }
   body:has(#bio) #now .entry-title { font-size: 2.6rem; }
   body:has(#pages) .entry-title { font-size: 18vw; }
   body:has(#pages) .index-list a { font-size: 10vw; }
   .procon { grid-template-columns: 1fr; }
   .pc-col + .pc-col { border-left: 0; border-top: 1px solid var(--ink); }
   .colophon { grid-template-columns: 1fr; }
+  .monthly-redesign { align-items: flex-start; gap: 5px; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-  body::before, .wordmark, .page-num, body:has(#bio) .entry { transform: none !important; }
+  body::before, .wordmark, body:has(#bio) .entry { transform: none !important; }
 }
 
 @media (forced-colors: active) {

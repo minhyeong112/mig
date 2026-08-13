@@ -64,7 +64,7 @@ body::after { content:"2026"; position:fixed; z-index:0; right:-.05em; bottom:-.
 .slide { position:absolute; inset:0; display:flex; flex-direction:column; opacity:0; pointer-events:none; overflow-y:auto; transition:opacity .25s ease; }
 .slide.active { opacity:1; pointer-events:auto; }
 .slide.active:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: -3px; }
-.slide::before { content:"FRAME 0" attr(data-slide) " / PRIVATE"; position:absolute; z-index:2; top:26px; right:max(28px,calc(50% - 520px)); font:500 .62rem/1 var(--index); letter-spacing:.15em; color:var(--text-light); }
+.slide::before { content:"PRIVATE"; position:absolute; z-index:2; top:26px; right:max(28px,calc(50% - 520px)); font:500 .62rem/1 var(--index); letter-spacing:.15em; color:var(--text-light); }
 .slide-inner { position:relative; z-index:2; flex:1; width:100%; max-width:680px; margin:0 auto; padding:86px 34px 120px; }
 .slide-label { margin-bottom:8px; font:500 .68rem/1 var(--index); letter-spacing:.17em; text-transform:uppercase; color:var(--accent-ink); }
 .slide-title { margin-bottom:24px; font:400 clamp(2rem,5vw,4.7rem)/.92 var(--index); letter-spacing:-.055em; text-wrap:balance; }

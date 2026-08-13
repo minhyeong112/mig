@@ -47,5 +47,27 @@
       rel.add('noopener');
       link.setAttribute('rel', [...rel].join(' '));
     });
+
+    const nextRedesign = new Date('2026-09-01T09:00:00+07:00');
+    const banner = document.createElement('aside');
+    banner.className = 'monthly-redesign';
+    banner.setAttribute('aria-label', 'Monthly website redesign');
+    banner.innerHTML = '<span>This site gets a totally new design every month.</span><time></time>';
+    document.body.append(banner);
+
+    const countdown = banner.querySelector('time');
+    countdown.dateTime = nextRedesign.toISOString();
+    const updateCountdown = () => {
+      const remaining = Math.max(0, nextRedesign.getTime() - Date.now());
+      const minutes = Math.floor(remaining / 60000);
+      const days = Math.floor(minutes / 1440);
+      const hours = Math.floor((minutes % 1440) / 60);
+      const mins = minutes % 60;
+      countdown.textContent = remaining > 0
+        ? `Next remix in ${days}d ${hours}h ${mins}m`
+        : 'Next remix is due now';
+    };
+    updateCountdown();
+    window.setInterval(updateCountdown, 60000);
   });
 })();
