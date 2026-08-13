@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="dot.png" type="image/png">
+    <script src="scripts.js" defer></script>
+    <script>(function(){try{var s=localStorage.getItem('darkMode');var d=s===null?window.matchMedia('(prefers-color-scheme: dark)').matches:s==='true';if(d)document.documentElement.classList.add('dark-mode');}catch(e){}}());</script>
+
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+<div class="wrap">
+    <header class="header">
+        <button id="darkModeToggle" class="home-icon-circle" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+        <span class="wordmark" data-decorative aria-hidden="true">MIG</span>
+        <nav class="links" aria-label="Site">
+            <a href="index.html">Home</a>
+            <a href="https://whereismiguel.com/MigResumev11.pdf" target="_blank">Résumé</a>
+            <a href="https://cal.com/aiguy/hi" target="_blank">Contact</a>
+        </nav>
+    </header>
+
+    <span class="page-num" data-decorative aria-hidden="true">03</span>
+
+    <main id="main" tabindex="-1">
+        <section class="entry" id="pages" data-idx="03">
+            <a class="entry-num" data-decorative aria-hidden="true">03</a>
+            <h1 class="entry-title">Blog Pages </h1>
+            <ul class="index-list">
+                <li><a href="pages/mentors.html"><span class="entry-num" data-decorative aria-hidden="true">04</span>Mentors</a></li>
+                <li><a href="pages/tools.html"><span class="entry-num" data-decorative aria-hidden="true">05</span>Tools</a></li>
+                <li><a href="pages/muscleups.html"><span class="entry-num" data-decorative aria-hidden="true">06</span>Muscle-Ups</a></li>
+                <li><a href="pages/food.html"><span class="entry-num" data-decorative aria-hidden="true">07</span>Food</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+</body>
+</html>
