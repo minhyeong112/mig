@@ -40,14 +40,25 @@ img, video { max-width: 100%; }
   margin-bottom: 32px;
 }
 .home-icon-circle {
-  width: 20px;
-  min-width: 20px;
-  height: 20px;
+  position: relative;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.home-icon-circle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--classic-accent);
-  cursor: pointer;
+  transform: translate(-50%, -50%);
 }
 .wordmark { display: none; }
 .links {
@@ -154,7 +165,7 @@ main { display: block; }
   color-scheme: dark;
 }
 .dark-mode body { background: var(--classic-bg); color: var(--classic-text); }
-.dark-mode .home-icon-circle { background: #876cff; }
+.dark-mode .home-icon-circle::after { background: #876cff; }
 
 @media (max-width: 600px) {
   .wrap { width: min(100% - 42px, 700px); padding-top: 30px; padding-bottom: 148px; }

@@ -2,8 +2,8 @@
   'use strict';
 
   const designs = Object.freeze([
-    Object.freeze({ id: 'classic-2026-08', label: 'Classic', css: '/designs/classic-2026-08.css' }),
-    Object.freeze({ id: 'poster-2026-08', label: 'Kinetic Poster', css: '/designs/poster-2026-08.css' })
+    Object.freeze({ id: 'classic-2026-08', label: 'Classic', css: '/designs/classic-2026-08.css?v=20260813-theme' }),
+    Object.freeze({ id: 'poster-2026-08', label: 'Kinetic Poster', css: '/designs/poster-2026-08.css?v=20260813-theme' })
   ]);
   const latest = designs[designs.length - 1];
   let requested = null;

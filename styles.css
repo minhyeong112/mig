@@ -5,7 +5,7 @@
 }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --paper: #f3f0e6;
   --ink: #121212;
   --subtle: #514f48;
@@ -26,6 +26,7 @@
 }
 
 :root.dark-mode {
+  color-scheme: dark;
   --paper: #11110f;
   --ink: #f3f0e6;
   --subtle: #b9b5aa;

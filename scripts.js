@@ -22,6 +22,74 @@
         try { localStorage.setItem('darkMode', String(root.classList.contains('dark-mode'))); } catch (_) {}
         syncTheme();
       });
+
+      let showThemeHint = true;
+      try {
+        showThemeHint = sessionStorage.getItem('wimThemeHintSeen') !== 'true';
+        if (showThemeHint) sessionStorage.setItem('wimThemeHintSeen', 'true');
+      } catch (_) {}
+
+      if (showThemeHint) {
+        const hintStyle = document.createElement('style');
+        hintStyle.textContent = `
+          .theme-mode-hint {
+            position: fixed;
+            z-index: 1002;
+            padding: 4px 7px;
+            border: 1px solid GrayText;
+            border-radius: 999px;
+            background: Canvas;
+            color: CanvasText;
+            font: 500 10px/1.2 ui-sans-serif, system-ui, sans-serif;
+            letter-spacing: .08em;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(2px);
+            transition: opacity .35s ease, transform .35s ease;
+          }
+          .theme-mode-hint.is-visible { opacity: .68; transform: none; }
+          @media (prefers-reduced-motion: reduce) { .theme-mode-hint { transition: none; } }
+        `;
+        document.head.append(hintStyle);
+
+        const hint = document.createElement('span');
+        hint.className = 'theme-mode-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        document.body.append(hint);
+
+        const placeThemeHint = () => {
+          if (!hint.isConnected) return;
+          const rect = toggle.getBoundingClientRect();
+          const below = rect.top + rect.height / 2 < innerHeight / 2;
+          hint.textContent = below ? '↑ try me' : 'try me ↓';
+          const left = Math.max(8, Math.min(innerWidth - hint.offsetWidth - 8, rect.left + rect.width / 2 - hint.offsetWidth / 2));
+          const top = below ? rect.bottom + 7 : rect.top - hint.offsetHeight - 7;
+          hint.style.left = `${left}px`;
+          hint.style.top = `${Math.max(8, Math.min(innerHeight - hint.offsetHeight - 8, top))}px`;
+        };
+        let hintDismissed = false;
+        const dismissThemeHint = () => {
+          if (hintDismissed) return;
+          hintDismissed = true;
+          hint.classList.remove('is-visible');
+          setTimeout(() => {
+            hint.remove();
+            hintStyle.remove();
+            window.removeEventListener('resize', placeThemeHint);
+          }, reduced.matches ? 0 : 400);
+        };
+        placeThemeHint();
+        requestAnimationFrame(() => {
+          placeThemeHint();
+          hint.classList.add('is-visible');
+        });
+        window.addEventListener('load', placeThemeHint, { once: true });
+        setTimeout(placeThemeHint, 250);
+        window.addEventListener('resize', placeThemeHint, { passive: true });
+        toggle.addEventListener('click', dismissThemeHint, { once: true });
+        setTimeout(dismissThemeHint, 5000);
+      }
     }
 
     let frame = 0;
