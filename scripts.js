@@ -10,6 +10,8 @@
     const toggle = document.getElementById('darkModeToggle');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const finePointer = window.matchMedia('(pointer: fine)');
+    const history = window.WIM_DESIGN_HISTORY;
+    const currentDesign = () => history?.designs.find((design) => design.id === root.dataset.design);
 
     const syncTheme = () => {
       if (toggle) toggle.setAttribute('aria-pressed', root.classList.contains('dark-mode') ? 'true' : 'false');
@@ -18,8 +20,10 @@
 
     if (toggle) {
       toggle.addEventListener('click', () => {
-        root.classList.toggle('dark-mode');
-        try { localStorage.setItem('darkMode', String(root.classList.contains('dark-mode'))); } catch (_) {}
+        const theme = root.classList.contains('dark-mode') ? 'light' : 'dark';
+        const design = currentDesign();
+        if (design && typeof history?.setTheme === 'function') history.setTheme(design, theme);
+        else root.classList.toggle('dark-mode', theme === 'dark');
         syncTheme();
       });
 
@@ -127,7 +131,6 @@
 
     const controls = document.createElement('div');
     controls.className = 'design-switcher';
-    const history = window.WIM_DESIGN_HISTORY;
     if (history && history.designs.length > 1) {
       const previous = document.createElement('button');
       previous.type = 'button';
@@ -157,7 +160,9 @@
         if (!stylesheet) return;
         stylesheet.href = selected.css;
         document.documentElement.dataset.design = selected.id;
+        if (typeof history.applyTheme === 'function') history.applyTheme(selected);
         try { sessionStorage.setItem('wimDesign', selected.id); } catch (_) {}
+        syncTheme();
         syncDesignStatus();
       };
       previous.addEventListener('click', () => chooseDesign(-1));
