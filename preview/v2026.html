@@ -438,6 +438,15 @@ body::after { content:"2026"; position:fixed; z-index:0; right:-.05em; bottom:-.
 </main>
 
 <script>
+try {
+  const cleanPath = location.pathname
+    .replace(/\/index(?:\.html)?$/, '/')
+    .replace(/\.html$/, '');
+  if (cleanPath !== location.pathname) {
+    history.replaceState(history.state, '', `${cleanPath}${location.search}${location.hash}`);
+  }
+} catch (_) {}
+
 const PASS = '123';
 
 // Deck

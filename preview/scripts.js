@@ -1,6 +1,15 @@
 (() => {
   'use strict';
 
+  try {
+    const cleanPath = location.pathname
+      .replace(/\/index(?:\.html)?$/, '/')
+      .replace(/\.html$/, '');
+    if (cleanPath !== location.pathname) {
+      history.replaceState(history.state, '', `${cleanPath}${location.search}${location.hash}`);
+    }
+  } catch (_) {}
+
   const ready = (fn) => document.readyState === 'loading'
     ? document.addEventListener('DOMContentLoaded', fn, { once: true })
     : fn();
