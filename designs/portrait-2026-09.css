@@ -615,7 +615,11 @@ video { display: block; width: 100%; height: auto; background: #090909; }
     gap: 8px;
     border-top: 1px solid var(--line);
   }
-  .page-title { font-size: clamp(2.4rem, 12vw, 4.8rem); }
+  .page-title {
+    justify-self: end;
+    max-width: calc(100vw - 150px);
+    font-size: clamp(2.2rem, 10.5vw, 4.8rem);
+  }
   .update-text { margin-top: .45em; }
 
   body:has(#bio) .header { grid-template-columns: 48px 1fr; }
