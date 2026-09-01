@@ -129,7 +129,7 @@
       link.setAttribute('rel', [...rel].join(' '));
     });
 
-    const nextRedesign = new Date('2026-09-01T09:00:00+07:00');
+    const nextRedesign = new Date('2026-10-01T09:00:00+07:00');
     const banner = document.createElement('aside');
     banner.className = 'monthly-redesign';
     banner.setAttribute('aria-label', 'Monthly website redesign');

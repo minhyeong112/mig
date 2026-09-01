@@ -13,6 +13,12 @@
       label: 'Kinetic Poster',
       css: '/designs/poster-2026-08.css?v=20260818-design-theme',
       defaultTheme: 'dark'
+    }),
+    Object.freeze({
+      id: 'portrait-2026-09',
+      label: 'Portrait Archive',
+      css: '/designs/portrait-2026-09.css?v=20260901-portrait-archive',
+      defaultTheme: 'light'
     })
   ]);
   const latest = designs[designs.length - 1];
