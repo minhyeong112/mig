@@ -12,6 +12,7 @@
   --paper-raised: #fffdf7;
   --ink: #191915;
   --muted: #666257;
+  --now-copy: #56534c;
   --line: rgba(25, 25, 21, .24);
   --paper-rule: rgba(25, 25, 21, .075);
   --accent: #3157d7;
@@ -29,6 +30,7 @@
   --paper-raised: #22221d;
   --ink: #f4f0e7;
   --muted: #b8b2a5;
+  --now-copy: #b8b2a5;
   --line: rgba(244, 240, 231, .24);
   --paper-rule: rgba(244, 240, 231, .07);
   --accent: #91a8ff;
@@ -559,6 +561,39 @@ video { display: block; width: 100%; height: auto; background: #090909; }
 }
 .design-switcher__button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 .design-switcher__status { min-width: 88px; text-align: center; white-space: nowrap; }
+
+/* Keep both desktop reading columns comfortable on shorter laptop screens. */
+@media (min-width: 1101px) {
+  body:has(#bio) main {
+    grid-template-columns: minmax(260px, .85fr) minmax(350px, 1.3fr) minmax(320px, 1.05fr);
+    column-gap: clamp(24px, 2.3vw, 34px);
+  }
+  body:has(#bio) main::before { grid-column: 2; }
+  body:has(#bio) #bio {
+    grid-column: 3;
+    max-width: 460px;
+    padding-left: clamp(16px, 1.5vw, 26px);
+  }
+  body:has(#bio) .home-intro {
+    font-size: clamp(1.05rem, 1.25vw, 1.28rem);
+    line-height: 1.46;
+    text-wrap: pretty;
+  }
+  body:has(#bio) #now {
+    grid-column: 1;
+    align-self: center;
+    max-width: none;
+    margin-bottom: 0;
+    padding-right: clamp(8px, 1vw, 16px);
+  }
+  body:has(#bio) #now .entry-title { font-size: clamp(2rem, 2.9vw, 3.35rem); }
+  body:has(#bio) #now .prose {
+    color: var(--now-copy);
+    font-size: clamp(.9rem, .92vw, .98rem);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+}
 
 @media (max-width: 1100px) {
   body:has(#bio) main {
