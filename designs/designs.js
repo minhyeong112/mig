@@ -19,6 +19,12 @@
       label: 'Portrait Archive',
       css: '/designs/portrait-2026-09.css?v=20260901-portrait-archive',
       defaultTheme: 'light'
+    }),
+    Object.freeze({
+      id: 'signal-2026-10',
+      label: 'Night Signal',
+      css: '/designs/signal-2026-10.css?v=20261001-night-signal',
+      defaultTheme: 'dark'
     })
   ]);
   const latest = designs[designs.length - 1];
