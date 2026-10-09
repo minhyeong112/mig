@@ -25,6 +25,12 @@
       label: 'Night Signal',
       css: '/designs/signal-2026-10.css?v=20261001-night-signal',
       defaultTheme: 'dark'
+    }),
+    Object.freeze({
+      id: 'airmail-2026-10',
+      label: 'Airmail',
+      css: '/designs/airmail-2026-10.css?v=20261009-airmail',
+      defaultTheme: 'light'
     })
   ]);
   const latest = designs[designs.length - 1];
