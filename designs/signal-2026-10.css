@@ -634,6 +634,12 @@ video { display: block; width: 100%; height: auto; border: 1px solid var(--ink);
     max-width: calc(100vw - 96px);
     font-size: clamp(2rem, 10.5vw, 4.8rem);
   }
+  .header:not(:has(.links)) .page-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+    margin: 30px 0 14px;
+  }
   .update-text { margin-top: .45em; }
 
   body:has(#bio) #bio {

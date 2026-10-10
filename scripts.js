@@ -76,7 +76,12 @@
           const rect = toggle.getBoundingClientRect();
           const below = rect.top + rect.height / 2 < innerHeight / 2;
           hint.textContent = below ? '↑ try me' : 'try me ↓';
-          const left = Math.max(8, Math.min(innerWidth - hint.offsetWidth - 8, rect.left + rect.width / 2 - hint.offsetWidth / 2));
+          // Keep the arrow glyph on the toggle's center so the pill hangs from the
+          // toggle instead of drifting outside the page margin.
+          const center = rect.left + rect.width / 2;
+          const arrowInset = 12;
+          const preferred = below ? center - arrowInset : center - hint.offsetWidth + arrowInset;
+          const left = Math.max(8, Math.min(innerWidth - hint.offsetWidth - 8, preferred));
           const top = below ? rect.bottom + 7 : rect.top - hint.offsetHeight - 7;
           hint.style.left = `${left}px`;
           hint.style.top = `${Math.max(8, Math.min(innerHeight - hint.offsetHeight - 8, top))}px`;

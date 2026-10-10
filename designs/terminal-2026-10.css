@@ -1,0 +1,443 @@
+/* TERMINAL / October 2026 remix
+   Miguel's site as a shell session on a self-hosted box: a tmux-style status
+   bar, prompts that introduce each section, box-drawn panes and one blinking
+   cursor. Phosphor green on near-black by default; a paper-white "daylight"
+   mode for the light theme. */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg: #f4f3ee;
+  --pane: #fbfaf6;
+  --ink: #1c1f1a;
+  --dim: #5c6158;
+  --line: rgba(28, 31, 26, .22);
+  --green: #1d7a3a;
+  --amber: #8a5a00;
+  --cyan: #0b6b7d;
+  --magenta: #9b2f7a;
+  --bar: #1c1f1a;
+  --bar-ink: #f4f3ee;
+  --glow: none;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+:root.dark-mode {
+  color-scheme: dark;
+  --bg: #0b0e0c;
+  --pane: #0f1411;
+  --ink: #d7e6d9;
+  --dim: #8a9a8d;
+  --line: rgba(124, 255, 160, .2);
+  --green: #6bff9a;
+  --amber: #ffc457;
+  --cyan: #6fdcef;
+  --magenta: #ff8ad8;
+  --bar: #6bff9a;
+  --bar-ink: #07120b;
+  --glow: 0 0 .5em rgba(107, 255, 154, .35);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { min-width: 0; overflow-x: clip; background: var(--bg); scroll-behavior: smooth; }
+body {
+  min-width: 0;
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.65 var(--mono);
+  font-variant-ligatures: none;
+  -webkit-font-smoothing: antialiased;
+}
+:root.dark-mode body {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(107, 255, 154, .06), transparent 60%),
+    var(--bg);
+}
+/* Faint scanlines, dark mode only. */
+:root.dark-mode body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 3px);
+  opacity: .5;
+}
+::selection { background: var(--green); color: var(--bg); }
+a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+}
+a:hover { color: var(--bg); background: var(--cyan); text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, video:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+main:focus-visible { outline: none; }
+button, input { font: inherit; }
+img, video { max-width: 100%; }
+
+.wrap {
+  width: min(100% - 32px, 1080px);
+  margin: 0 auto;
+  padding: 0 0 24px;
+}
+
+/* ---------- Header: tmux status bar ---------- */
+.header {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 4px;
+  min-height: 44px;
+  margin-bottom: clamp(36px, 6vh, 60px);
+  color: var(--bar-ink);
+  font: 700 .82rem/1 var(--mono);
+}
+/* Full-bleed status bar drawn behind the first header row only. */
+.header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 44px;
+  transform: translateX(-50%);
+  background: var(--bar);
+}
+.home-icon-circle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: -10px;
+  border: 0;
+  background: transparent;
+  color: var(--bar-ink);
+  cursor: pointer;
+}
+.home-icon-circle::before {
+  content: "◐";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 400 1.25rem/1 var(--mono);
+  transition: transform .3s ease;
+}
+.home-icon-circle:hover::before { transform: rotate(180deg); }
+.wordmark::before { content: "[0] "; opacity: .65; }
+.wordmark::after { content: "@whereismiguel:~"; font-weight: 400; opacity: .8; }
+.wordmark { white-space: nowrap; }
+.links { display: flex; margin-left: auto; margin-right: -10px; }
+.links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--bar-ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+.links a::before { content: "./"; opacity: .6; font-weight: 400; }
+.links a:hover { background: var(--bar-ink); color: var(--bar); }
+
+/* Inner page titles render as a command + its output heading. */
+.page-title {
+  flex: 1 0 100%;
+  margin: 0;
+  padding: clamp(28px, 5vh, 52px) 0 0;
+  color: var(--ink);
+  font: 800 clamp(2.4rem, 7vw, 5rem)/1 var(--mono);
+  letter-spacing: -.04em;
+  text-shadow: var(--glow);
+}
+.page-title::before {
+  content: "$ cat ./page.md";
+  display: block;
+  margin-bottom: 14px;
+  color: var(--green);
+  font: 500 .9rem/1 var(--mono);
+  letter-spacing: 0;
+  text-shadow: none;
+}
+.update-text {
+  display: block;
+  margin-top: 12px;
+  color: var(--dim);
+  font: 400 .85rem/1 var(--mono);
+  letter-spacing: 0;
+  text-shadow: none;
+}
+.update-text::before { content: "# "; }
+
+.prose { margin: 0; }
+.entry-title, .entry h2 {
+  margin: 0 0 12px;
+  color: var(--amber);
+  font: 700 1.1rem/1.3 var(--mono);
+}
+.entry h2::before, .entry-title::before { content: "## "; opacity: .6; }
+.intro {
+  margin: 0 0 clamp(26px, 4vh, 40px);
+  color: var(--dim);
+  font: 400 1rem/1.65 var(--mono);
+}
+.intro::before { content: "> "; color: var(--green); }
+
+/* Shared pane look. */
+body:has(#bio) #bio,
+body:has(#bio) #now,
+.inventory .entry,
+body:has(.procon) main > .entry,
+body:has(.video-container) main > .entry,
+body:has(#pages) #pages,
+#mentors,
+#entry {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--pane);
+}
+
+/* ---------- Home ---------- */
+body:has(#bio) main { display: grid; gap: 22px; }
+body:has(#bio) #bio { padding: clamp(26px, 4vw, 44px); }
+body:has(#bio) #bio::before {
+  content: "$ whoami";
+  display: block;
+  margin-bottom: 18px;
+  color: var(--green);
+  font: 500 .95rem/1 var(--mono);
+}
+body:has(#bio) .home-intro {
+  margin: 0;
+  font: 500 clamp(1.04rem, 1.55vw, 1.24rem)/1.7 var(--mono);
+  letter-spacing: -.01em;
+  text-shadow: var(--glow);
+}
+body:has(#bio) .home-intro::after {
+  content: "";
+  display: inline-block;
+  width: .6em;
+  height: 1.1em;
+  margin-left: .3em;
+  vertical-align: -.18em;
+  background: var(--green);
+  animation: term-blink 1.1s steps(1) infinite;
+}
+body:has(#bio) #now { padding: clamp(24px, 3.6vw, 40px); }
+body:has(#bio) #now::before {
+  content: "$ cat now.md";
+  display: block;
+  margin-bottom: 14px;
+  color: var(--green);
+  font: 500 .95rem/1 var(--mono);
+}
+body:has(#bio) #now .entry-title { font-size: 1.15rem; }
+body:has(#bio) #now .update-text { display: inline; margin-left: 10px; }
+body:has(#bio) #now .prose { color: var(--ink); opacity: .92; font-size: 1rem; line-height: 1.75; }
+/* Pane labels drawn into the border, like a TUI window title. */
+body:has(#bio) #bio::after,
+body:has(#bio) #now::after {
+  position: absolute;
+  top: -.75em;
+  left: 18px;
+  padding: 0 8px;
+  background: var(--bg);
+  color: var(--dim);
+  font: 500 .78rem/1.5 var(--mono);
+}
+body:has(#bio) #bio::after { content: "─ about.txt ─"; }
+body:has(#bio) #now::after { content: "─ now.md ─"; }
+@keyframes term-blink { 50% { opacity: 0; } }
+
+/* ---------- Blog: ls -la ---------- */
+body:has(#pages) #pages { padding: clamp(24px, 3.6vw, 40px); }
+body:has(#pages) #pages::before {
+  content: "$ ls -la ./blog";
+  display: block;
+  margin-bottom: 18px;
+  color: var(--green);
+  font: 500 .95rem/1 var(--mono);
+}
+body:has(#pages) .entry-title {
+  margin: 0 0 18px;
+  color: var(--ink);
+  font: 800 clamp(2.4rem, 7vw, 5rem)/1 var(--mono);
+  letter-spacing: -.04em;
+  text-shadow: var(--glow);
+}
+body:has(#pages) .entry-title::before { content: none; }
+.index-list { margin: 0; padding: 0; list-style: none; }
+body:has(#pages) .index-list li { border-top: 1px dashed var(--line); }
+body:has(#pages) .index-list a {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font: 700 clamp(1.15rem, 2.4vw, 1.6rem)/1.2 var(--mono);
+}
+body:has(#pages) .index-list a::before {
+  content: "drwxr-xr-x  mig";
+  color: var(--dim);
+  font: 400 .85rem/1 var(--mono);
+  white-space: nowrap;
+}
+body:has(#pages) .index-list a::after { content: "/"; margin-left: -14px; color: var(--cyan); }
+body:has(#pages) .index-list a:hover { background: var(--green); color: var(--bg); }
+body:has(#pages) .index-list a:hover::before { color: inherit; }
+
+/* ---------- Mentors ---------- */
+#mentors { padding: clamp(24px, 3.6vw, 40px); }
+#mentors > .prose { margin-bottom: 22px; color: var(--dim); }
+#mentors .index-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 15ch) minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 22px;
+  min-height: 48px;
+  border-top: 1px dashed var(--line);
+}
+#mentors .index-list a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+#mentors .index-list a::before { content: "→ "; color: var(--green); }
+#mentors .index-list a:hover { background: var(--green); color: var(--bg); }
+.row-note { color: var(--dim); }
+.row-note::before { content: "# "; }
+
+/* ---------- Tools ---------- */
+.inventory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+.inventory-col { display: grid; gap: 22px; min-width: 0; }
+.inventory .entry { padding: 22px 24px 14px; }
+.inventory ul { margin: 0; padding: 0; list-style: none; }
+.inventory li {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px dashed var(--line);
+}
+.inventory li::before { content: "[x]"; color: var(--green); flex: none; }
+
+/* ---------- Long reads ---------- */
+body:has(.procon) main > .entry,
+body:has(.video-container) main > .entry {
+  margin-bottom: 22px;
+  padding: clamp(22px, 3.4vw, 36px);
+}
+body:has(.procon) main > .entry::before,
+body:has(.video-container) main > .entry::before {
+  content: "─ entry " attr(data-idx) " ─";
+  position: absolute;
+  top: -.75em;
+  left: 18px;
+  padding: 0 8px;
+  background: var(--bg);
+  color: var(--dim);
+  font: 500 .78rem/1.5 var(--mono);
+}
+body:has(.procon) main > .entry > .prose,
+body:has(.video-container) main > .entry > .prose { font-size: 1rem; }
+.procon { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+.pc-col { min-width: 0; padding: 12px 14px; border: 1px dashed var(--line); }
+.pc-label { display: block; margin-bottom: 6px; font-weight: 700; }
+.pc-col:first-child .pc-label { color: var(--green); }
+.pc-col:first-child .pc-label::before { content: "+++ "; }
+.pc-col + .pc-col .pc-label { color: var(--magenta); }
+.pc-col + .pc-col .pc-label::before { content: "--- "; }
+.pc-col ul { margin: 0; padding: 0; list-style: none; }
+.pc-col li::before { content: "  "; white-space: pre; }
+.gallery { display: flex; gap: 14px; margin-top: 18px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.gallery .slide { flex: 0 0 min(80%, 380px); scroll-snap-align: start; }
+.gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); }
+.video-container { margin-top: 16px; border: 1px solid var(--line); }
+video { display: block; width: 100%; height: auto; background: #000; }
+
+#entry { padding: clamp(22px, 3.4vw, 36px); }
+
+/* ---------- Sign-off ---------- */
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10px 24px;
+  margin-top: 28px;
+  color: var(--dim);
+}
+.colophon p { margin: 0; }
+.sig { color: var(--green); font: 800 1.6rem/1 var(--mono); text-shadow: var(--glow); }
+.sig::before { content: "$ echo "; color: var(--dim); font-weight: 400; font-size: .9rem; text-shadow: none; }
+
+/* ---------- Monthly remix bar ---------- */
+.monthly-redesign {
+  width: min(100% - 32px, 1080px);
+  margin: 0 auto 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+  padding: 8px 8px 8px 16px;
+  border: 1px solid var(--line);
+  background: var(--pane);
+  color: var(--dim);
+  font: 400 .84rem/1.4 var(--mono);
+}
+.monthly-redesign__message { flex: 1 1 260px; color: var(--ink); }
+.monthly-redesign__message::before { content: "$ crontab -l  # "; color: var(--green); }
+.monthly-redesign time { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--amber); }
+.design-switcher { display: flex; align-items: center; gap: 2px; }
+.design-switcher__button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: 700 1rem/1 var(--mono);
+  cursor: pointer;
+}
+.design-switcher__button:hover { background: var(--green); border-color: var(--green); color: var(--bg); }
+.design-switcher__status { min-width: 112px; text-align: center; color: var(--ink); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .wrap, .monthly-redesign { width: min(100% - 24px, 1080px); }
+  body { font-size: 14px; }
+  .wordmark::after { display: none; }
+  .links a { padding: 0 8px; }
+  .links a::before { display: none; }
+  body:has(#bio) .home-intro { font-size: 1.04rem; }
+  body:has(#pages) .index-list a::before { content: "drwx"; }
+  #mentors .index-list li { grid-template-columns: 1fr; gap: 0; padding: 6px 0 10px; }
+  .inventory, .procon { grid-template-columns: 1fr; }
+  .monthly-redesign__message::before { content: "# "; }
+}
+@media (max-width: 380px) {
+  .wordmark::before { display: none; }
+  .links a { padding: 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .header { border-bottom: 1px solid CanvasText; }
+  body:has(#bio) .home-intro::after { background: CanvasText; }
+}

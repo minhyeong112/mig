@@ -31,6 +31,24 @@
       label: 'Airmail',
       css: '/designs/airmail-2026-10.css?v=20261009-airmail',
       defaultTheme: 'light'
+    }),
+    Object.freeze({
+      id: 'index-2026-10',
+      label: 'Index',
+      css: '/designs/index-2026-10.css?v=20261009-trio',
+      defaultTheme: 'light'
+    }),
+    Object.freeze({
+      id: 'terminal-2026-10',
+      label: 'Terminal',
+      css: '/designs/terminal-2026-10.css?v=20261009-trio',
+      defaultTheme: 'dark'
+    }),
+    Object.freeze({
+      id: 'riso-2026-10',
+      label: 'Riso',
+      css: '/designs/riso-2026-10.css?v=20261009-trio',
+      defaultTheme: 'light'
     })
   ]);
   const latest = designs[designs.length - 1];
